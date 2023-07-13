@@ -5,7 +5,8 @@ function Establishments(){
 
     return(
         <div>
-            <h2>Establishments</h2>
+            <br></br>
+            <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Establishments</h1>
             <EstablishmentForm />
         </div>
     )
