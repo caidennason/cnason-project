@@ -1,23 +1,59 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
+import Establishments from './features/Establishments/Establishments';
+import Users from './features/Users/User';
+import HomePage from './features/Home/HomePage';
+import Login from './features/Users/Login';
+import Signup from './features/Users/Signup';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import { Typography, Button, AppBar, Toolbar, IconButton, Stack } from '@mui/material';
+import MenuIcon from '@mui/material/Menu';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function App() {
+
+  const [number, setNumber] = useState(0);
+
+  const addOne = () => {
+    setNumber(number+1)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {number}
+      <Button variant="contained" onClick={addOne}>PLEASE</Button>
+    <Router>
+
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton size="large" edge="start" color="inherit" aria-label="logo">
+          <AcUnitIcon />
+        </IconButton>
+        <Typography variant='h6' component='div' sx={{flexGrow: 1}}>
+          Dog Friendly
+        </Typography>
+        <Stack direction='row' spacing={2} >
+          <Button color='inherit' component={Link} to='/'>Home</Button>
+          <Button color='inherit' component={Link} to='/establishments'>Establishments</Button>
+          <Button color='inherit' component={Link} to='/profile'>Profile</Button>
+          <Button color='inherit' component={Link} to='/login'>Login</Button>
+          <Button color='inherit' component={Link} to='/signup'>Signup</Button>
+        </Stack>
+      </Toolbar>
+    </AppBar>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/establishments" element={<Establishments />} />
+        <Route path="/profile" element={<Users />} />
+        <Route path="/login" element={<Login/>} />
+        <Route path='/signup' element={<Signup/>}/>
+      </Routes>
+    </Router>
     </div>
   );
 }
