@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState} from 'react';
 import Establishments from './features/Establishments/Establishments';
-import Users from './features/Users/User';
+import User from './features/Users/User';
 import HomePage from './features/Home/HomePage';
 import Login from './features/Users/Login';
 import Signup from './features/Users/Signup';
@@ -33,7 +33,7 @@ function App() {
         <IconButton size="large" edge="start" color="inherit" aria-label="logo">
           <AcUnitIcon />
         </IconButton>
-        <Typography variant='h6' component='div' sx={{flexGrow: 1}}>
+        <Typography variant='h6' style={{textDecoration: 'none'}}color='inherit' component={Link} to='/' sx={{flexGrow: 1}}>
           Dog Friendly
         </Typography>
         <Stack direction='row' spacing={2} >
@@ -49,7 +49,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/establishments" element={<Establishments />} />
-        <Route path="/profile" element={<Users />} />
+        <Route path="/profile" element={<User />} />
         <Route path="/login" element={<Login/>} />
         <Route path='/signup' element={<Signup/>}/>
       </Routes>

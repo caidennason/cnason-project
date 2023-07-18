@@ -15,7 +15,6 @@ function Login(){
         <div>
             <br></br>
             <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Log In</h2>
-            <br></br>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <TextField required id="outlined-basic" label="Username" variant="outlined" />
                 <TextField required id="filled-basic" label="Password" variant="outlined" />
