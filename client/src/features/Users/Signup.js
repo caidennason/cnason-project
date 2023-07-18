@@ -54,15 +54,17 @@ function Signup(){
         </Box>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
             <TextField onChange={handleLocation}  id="outlined-basic" label={location} variant="outlined"/>
-            <TextField onChange={handleBio}  id="outlined-basic" label={bio} variant="outlined"/>
+            <TextField onChange={handleBio}  id="outlined-multiline-flexible" multiline maxRows={5} label={bio} variant="outlined"/>
         </Box>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
-            <TextField onChange={handlePhotoUrl} id="outlined-basic" label={photoUrl} variant="outlined"/>
+            <TextField onChange={handlePhotoUrl} id="outlined-multiline-flexible" multiline maxRows={5} label={photoUrl} variant="outlined"/>
         </Box>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
             <Button type='submit' variant='contained'>Sign up</Button>
         </Box>
         </form>
+
+        
     );
 };
 

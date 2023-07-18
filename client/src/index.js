@@ -1,3 +1,5 @@
+import { createStore } from "redux";
+import rootReducer from "./reducers";
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -7,6 +9,11 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 root.render(
   <React.StrictMode>

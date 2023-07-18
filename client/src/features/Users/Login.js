@@ -1,10 +1,14 @@
 import React from 'react';
 import { Button, TextField, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom'
 
 function Login(){
 
+    const navigate = useNavigate()
+
     const handleLogin = () => {
         console.log('clicked')
+        navigate('/')
     }
 
     return(
