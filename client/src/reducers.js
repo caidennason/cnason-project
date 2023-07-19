@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import establishmentsReducer from "./features/Establishments/establishmentsSlice";
-import signUpReducer from "./features/Users/signupSlice";
+import userReducer from "./features/Users/userSlice";
 
 const rootReducer = combineReducers({
   establishments: establishmentsReducer,
-  signups: signUpReducer,
+  signups: userReducer,
 });
 
 export default rootReducer;

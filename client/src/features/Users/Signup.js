@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addUser } from './signupSlice';
+import { addUser } from './userSlice';
 
 
 function Signup(){

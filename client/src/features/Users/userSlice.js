@@ -5,11 +5,21 @@ export const addUser = (user) => {
     };
 };
 
+export const userLogin = (user) => {
+    return {
+        type: "user/login", 
+        payload: user
+    };
+};
+
 const initialState = [];
 
-export default function signUpReducer(state = initialState, action){
+export default function userReducer(state = initialState, action){
     switch(action.type) {
         case "user/signUp":
+            console.log(action.payload)
+
+        case "user/login":
             console.log(action.payload)
 
         default: 

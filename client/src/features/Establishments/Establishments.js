@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import EstablishmentForm from './EstablishmentForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEstablishments } from './establishmentsSlice'
 
 function Establishments(){
+
+    const establishments = useSelector((state) => state.entities)
+    const dispatch = useDispatch()
+
+    // useEffect(() => {
+    //     dispatch(fetchEstablishments())
+    // }, [])
+
+    console.log(establishments)
 
     return(
         <div>
