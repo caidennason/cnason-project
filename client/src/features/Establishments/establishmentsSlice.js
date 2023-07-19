@@ -25,8 +25,12 @@ const establishmentsSlice = createSlice({
     extraReducers: {
         [fetchEstablishments.fulfilled](state, action) {
             state.entities = action.payload;
-            state.status = "idle";
-            console.log(state.entities, 'is the get request working')
+            state.status = "loaded";
+            console.log(state.status, state.entities, 'is the get request working')
+        },
+        [fetchEstablishments.pending](state, action){
+            state.status = "loading..."
+            // console.log(state.status)
         },
     },
 })

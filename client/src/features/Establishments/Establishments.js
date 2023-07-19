@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import EstablishmentForm from './EstablishmentForm';
+import EstablishmentCard from './EstablishmentCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEstablishments } from './establishmentsSlice'
 
@@ -12,7 +13,9 @@ function Establishments(){
         dispatch(fetchEstablishments())
     }, [dispatch])
 
-    console.log(establishments.entities, 'check')
+    console.log(establishments.establishments.entities, 'check')
+    const allEstablishments = establishments.establishments.entities
+    console.log(allEstablishments)
 
     
 
@@ -21,6 +24,9 @@ function Establishments(){
             <br></br>
             <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Establishments</h1>
             <EstablishmentForm />
+            {allEstablishments.map((e) => {
+                return <EstablishmentCard name={e.name}/>
+            })}
         </div>
     )
 }
