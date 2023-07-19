@@ -5,14 +5,14 @@ import { fetchEstablishments } from './establishmentsSlice'
 
 function Establishments(){
 
-    const establishments = useSelector((state) => state.entities)
+    const establishments = useSelector((state) => state)
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     dispatch(fetchEstablishments())
-    // }, [])
+    useEffect(() => {
+        dispatch(fetchEstablishments())
+    }, [dispatch])
 
-    console.log(establishments)
+    console.log(establishments, 'check')
 
     return(
         <div>

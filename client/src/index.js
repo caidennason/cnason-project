@@ -1,3 +1,4 @@
+import store from "./store"
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./reducers";
@@ -11,10 +12,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// const store = createStore(
+//   rootReducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 root.render(
   <React.StrictMode>
