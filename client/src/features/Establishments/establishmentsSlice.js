@@ -1,9 +1,10 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 
 export const fetchEstablishments = createAsyncThunk("establishments/fetchEstablishments", () => {
-    return fetch("http://localhost:3000/establishments")
+    return fetch("http://localhost:4000/establishments")
     .then((res) => res.json())
     .then((data) => data)
+    // .then((data) => console.log(data, 'from redux')) 
 })
 
 
@@ -16,6 +17,8 @@ const establishmentsSlice = createSlice({
     reducers: {
         addEstablishment(state, action){
             console.log(action.payload)
+            state.entities.push(action.payload)
+            console.log(state, 'this is state')
         }
     }
 })

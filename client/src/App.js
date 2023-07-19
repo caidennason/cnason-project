@@ -7,7 +7,7 @@ import Login from './features/Users/Login';
 import Signup from './features/Users/Signup';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-import { Typography, Button, AppBar, Toolbar, IconButton, Stack } from '@mui/material';
+import { Typography, Button, AppBar, Toolbar, IconButton, Stack, Avatar } from '@mui/material';
 import MenuIcon from '@mui/material/Menu';
 
 
@@ -29,9 +29,10 @@ function App() {
 
     <AppBar position="static">
       <Toolbar>
-        <IconButton size="large" edge="start" color="inherit" aria-label="logo">
+        {/* <IconButton size="large" edge="start" color="inherit" aria-label="logo">
           <AcUnitIcon />
-        </IconButton>
+        </IconButton> */}
+        <Avatar src='https://imgur.com/6Q01PXD.jpg' /> 
         <Typography variant='h6' style={{textDecoration: 'none'}}color='inherit' component={Link} to='/' sx={{flexGrow: 1}}>
           Dog Friendly
         </Typography>
