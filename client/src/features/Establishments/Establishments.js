@@ -12,7 +12,9 @@ function Establishments(){
         dispatch(fetchEstablishments())
     }, [dispatch])
 
-    console.log(establishments, 'check')
+    console.log(establishments.entities, 'check')
+
+    
 
     return(
         <div>

@@ -18,9 +18,17 @@ const establishmentsSlice = createSlice({
         addEstablishment(state, action){
             console.log(action.payload)
             state.entities.push(action.payload)
-            console.log(state, 'this is state')
+            // console.log(state, 'this is state')
         }
-    }
+
+    },
+    extraReducers: {
+        [fetchEstablishments.fulfilled](state, action) {
+            state.entities = action.payload;
+            state.status = "idle";
+            console.log(state.entities, 'is the get request working')
+        },
+    },
 })
 
 export const {addEstablishment} = establishmentsSlice.actions;
