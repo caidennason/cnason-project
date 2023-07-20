@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/reviews', to: "review#index"
   get '/users', to: "user#index"
 
+  post '/establishments', to: "establishment#create"
+
   delete '/users/:id', to: "user#delete"
 
   post '/signup', to: "user#create"

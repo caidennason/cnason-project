@@ -4,7 +4,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch } from "react-redux";
-import { addEstablishment } from './establishmentsSlice';
+import { addEstablishment, postEstablishment } from './establishmentsSlice';
 
 
 function EstablishmentForm(){
@@ -48,34 +48,48 @@ function EstablishmentForm(){
         setAllowsDogs(e.target.checked)
     }
 
+    const reset = () => {
+        setEstablishmentName('Establishment Name')
+        setEstablishmentLocation('Location')
+        setEstablishmentType('Type (Restaurant, Bar, etc)')
+        setEstablishmentPhotoUrl('Photo Url (Optional)')
+        setAllowsDogs(false)
+    }
+
     const handleEstablishmentSubmission = (e) => {
         e.preventDefault()
         const establishment = {
-            establishmentName, 
-            establishmentLocation,
-            establishmentType,
-            establishmentDescription,
-            establishmentPhotoUrl,
-            allowsDogs,
-        }
-        dispatch(addEstablishment(establishment))
+            name: establishmentName, 
+            location: establishmentLocation,
+            establishment_type: establishmentType,
+            bio: establishmentDescription,
+            photo: establishmentPhotoUrl,
+            allows_dogs: allowsDogs,
+        };
+        // dispatch(addEstablishment(establishment))
+        dispatch(postEstablishment(establishment))
+            .then((res) => res)
+            // .then((data) => {
+            //     console.log(data, 'sending to rails')
+            // })
+            .then((data) => data)
     }
 
-    console.log(allowsDogs, 'see if it works')
+    // console.log(allowsDogs, 'see if it works')
 
  
     return(
         <form onSubmit={handleEstablishmentSubmission}>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField id="outlined-basic" onChange={handleEstablishmentNameChange} label='Establishment Name' variant="outlined" />
+                <TextField id="outlined-basic" onChange={handleEstablishmentNameChange} label='Establishment Name' variant="outlined"/>
                 <TextField id="outlined-basic" onChange={handleEstablishmentLocationChange} label='Location' variant="outlined" />
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField id="outlined-basic" onChange={handleEstablishmentTypeChange} label='Type (Restaurant, Bar, etc)' variant="outlined"/>
-                <TextField id="outlined-basic" onChange={handleEstablishmentDescriptionChange} label='Description of the Establishment' variant="outlined"/>
+                <TextField id="outlined-basic" onChange={handleEstablishmentTypeChange} label='Type (Restaurant, Bar, etc)' variant="outlined" />
+                <TextField id="outlined-basic" onChange={handleEstablishmentDescriptionChange} label='Description of the Establishment' variant="outlined" />
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField  id="outlined-basic" onChange={handleEstablishmentPhotoUrlChange} label='Photo Url (Optional)' variant="outlined"/>
+                <TextField  id="outlined-basic" onChange={handleEstablishmentPhotoUrlChange} label='Photo Url (Optional)' variant="outlined" />
             </Box>
             <FormGroup style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <FormControlLabel control={<Checkbox defaultChecked onClick={handleAllowsDogs}/>} label="Allows Dogs" />

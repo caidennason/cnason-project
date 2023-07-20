@@ -25,7 +25,7 @@ function Establishments(){
             <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Establishments</h1>
             <EstablishmentForm />
             {allEstablishments.map((e) => {
-                return <EstablishmentCard name={e.name}/>
+                return <EstablishmentCard e={e}/>
             })}
         </div>
     )

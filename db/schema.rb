@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_19_024728) do
+ActiveRecord::Schema.define(version: 2023_07_19_221927) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2023_07_19_024728) do
     t.boolean "allows_dogs"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
