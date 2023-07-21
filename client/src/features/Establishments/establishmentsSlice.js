@@ -44,6 +44,12 @@ const establishmentsSlice = createSlice({
             state.status = "loading...";
             // console.log(state.status);
         },
+        [postEstablishment.pending](state, action){
+            state.status = "post request loading"
+        },
+        [postEstablishment.rejected](state, action){
+            state.status = "post request failed"
+        },
         [postEstablishment.fulfilled](state, action) {
             console.log(current(state));
             state.entities.push(action.payload);

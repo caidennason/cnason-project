@@ -4,7 +4,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch } from "react-redux";
-import { addEstablishment, postEstablishment } from './establishmentsSlice';
+import {  postEstablishment } from './establishmentsSlice';
 
 
 function EstablishmentForm(){
@@ -58,26 +58,18 @@ function EstablishmentForm(){
 
     const handleEstablishmentSubmission = (e) => {
         e.preventDefault()
-        const establishment = {
+        dispatch(postEstablishment({
             name: establishmentName, 
             location: establishmentLocation,
             establishment_type: establishmentType,
             bio: establishmentDescription,
             photo: establishmentPhotoUrl,
             allows_dogs: allowsDogs,
-        };
-        // dispatch(addEstablishment(establishment))
-        dispatch(postEstablishment(establishment))
+        }))
             .then((res) => res)
-            // .then((data) => {
-            //     console.log(data, 'sending to rails')
-            // })
             .then((data) => data)
     }
 
-    // console.log(allowsDogs, 'see if it works')
-
- 
     return(
         <form onSubmit={handleEstablishmentSubmission}>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
@@ -102,3 +94,29 @@ function EstablishmentForm(){
 }
 
 export default EstablishmentForm
+
+// const handleEstablishmentSubmission = (e) => {
+//     e.preventDefault()
+//     // const establishment = {
+//     //     name: establishmentName, 
+//     //     location: establishmentLocation,
+//     //     establishment_type: establishmentType,
+//     //     bio: establishmentDescription,
+//     //     photo: establishmentPhotoUrl,
+//     //     allows_dogs: allowsDogs,
+//     // };
+//     // dispatch(addEstablishment(establishment))
+//     dispatch(postEstablishment({
+//         name: establishmentName, 
+//         location: establishmentLocation,
+//         establishment_type: establishmentType,
+//         bio: establishmentDescription,
+//         photo: establishmentPhotoUrl,
+//         allows_dogs: allowsDogs,
+//     }))
+//         .then((res) => res)
+//         // .then((data) => {
+//         //     console.log(data, 'sending to rails')
+//         // })
+//         .then((data) => data)
+// }
