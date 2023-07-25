@@ -14,7 +14,7 @@ function EstablishmentForm(){
     const [establishmentType, setEstablishmentType] = useState('Type (Restaurant, Bar, etc)')
     const [establishmentDescription, setEstablishmentDescription] = useState('Short Description')
     const [establishmentPhotoUrl, setEstablishmentPhotoUrl] = useState('Phot URL (Optional)')
-    const [allowsDogs, setAllowsDogs] = useState(false)
+    const [allowsDogs, setAllowsDogs] = useState(true)
 
     const dispatch = useDispatch();
 
@@ -53,17 +53,17 @@ function EstablishmentForm(){
         setEstablishmentLocation('Location')
         setEstablishmentType('Type (Restaurant, Bar, etc)')
         setEstablishmentPhotoUrl('Photo Url (Optional)')
-        setAllowsDogs(false)
+        setAllowsDogs(!allowsDogs)
     }
 
     const handleEstablishmentSubmission = (e) => {
         e.preventDefault()
         dispatch(postEstablishment({
             name: establishmentName, 
-            location: establishmentLocation,
-            establishment_type: establishmentType,
-            bio: establishmentDescription,
             photo: establishmentPhotoUrl,
+            establishment_type: establishmentType,
+            location: establishmentLocation,
+            bio: establishmentDescription,
             allows_dogs: allowsDogs,
         }))
             .then((res) => res)

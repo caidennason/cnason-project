@@ -1,12 +1,14 @@
 class Establishment < ApplicationRecord
-    # validates :name, presence: true 
-    # validates :establishment_type, presence: true
-    # validates :location, presence: true 
-    # validates :bio, presence: true 
-    # validates :allows_dogs, presence: true 
+    validates :name, presence: true 
+    validates :establishment_type, presence: true
+    validates :location, presence: true 
+    validates :bio, presence: true 
+    validates :allows_dogs, presence: true 
+    # belongs_to :users
+    # has_many :reviews
+    # has_many :comments, through: :reviews
 end
 
-
-# DO NOT FUCK WITH ANYTHING ELSE. YOU JUST DID THIS WHEN YOU WERE DRUNK. LOOK AT IT SOBER. YOU JUST COMMENTED OUT THE VALIDATIONS 
-# AND IT WORKED. THIS IS THE ERROR YOU WERE GETTING Unpermitted parameter: establishment
-# I HAVE NO FUCKING CLUE HOW THIS IS WORKING. DO NOT FUCK WITH THIS WHILE DRINKING. JUST GO FOR IT IN THE MORNING
+# works when allows_dogs is commented out 
+# working now! had to change this on the front end. i had allows_dogs set to false, and chaged it to true on click. 
+# i changed it to true, and set to !allowsDogs, which seems to have fixed it
