@@ -6,12 +6,12 @@ class EstablishmentController < ApplicationController
     end
 
     def create
-        establishment = Establishment.create(establishment_params)
+        establishment = Establishment.create(est_params)
         render json: establishment
     end
 
     private
-    def establishment_params
+    def est_params
         params.permit(:name, :photo, :establishment_type, :location, :bio, :allows_dogs, :user_id)
     end
 
