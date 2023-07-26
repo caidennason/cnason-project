@@ -25,10 +25,6 @@ function EstablishmentCard({e, e:{name, location, bio, establishment_type, allow
     //     .then((check) => dispatch(deleteEstablishment(id)))
     // }
 
-    const handleRemoval = (e) => {
-        console.log(e)
-    }
-
     return (
         <div>
             <br></br>
@@ -36,7 +32,7 @@ function EstablishmentCard({e, e:{name, location, bio, establishment_type, allow
             <CardHeader 
                 title={name}
                 subheader={location}
-                action={<IconButton onClick={() => console.log('deleting', e)}>
+                action={<IconButton onClick={() => dispatch(removeEstablishment(e))}>
                             <ClearIcon />
                         </IconButton>}
             />
@@ -54,7 +50,6 @@ function EstablishmentCard({e, e:{name, location, bio, establishment_type, allow
                     onError={handleNoImage}
                 />
             </CardContent>
-            <Button >Click</Button>
         </Card >
         </div>
     )

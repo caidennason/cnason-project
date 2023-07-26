@@ -45,8 +45,13 @@ const establishmentsSlice = createSlice({
         //     // console.log(state, 'this is state')
         // }
         removeEstablishment(state, action){
-            const deletedEstablishmentId = action.payload
-            return state.entities.filter(establishment => establishment.id !== deletedEstablishmentId)
+            // const deletedEstablishmentId = action.payload
+            // return state.entities.filter(establishment => establishment.id !== deletedEstablishmentId)
+            console.log(current(state.entities))
+            console.log(action.payload, ' from redux')
+            const deletedEstablishment = action.payload
+            let check = state.entities.filter((e) => e.id !== deletedEstablishment.id)
+            state.entities = check
         }
     },
     extraReducers: {
