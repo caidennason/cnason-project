@@ -20,16 +20,16 @@ export const postEstablishment = createAsyncThunk("establishments/postEstablishm
     .then((data) => data)
 })
 
-// export const deleteEstablishment = createAsyncThunk("establishments/deleteEstablishment", (establishment) => {
-//     return fetch("http://localhost:4000/establishments", {
-//         method: 'DELETE',
-//         headers: {
-//             "Accept": "application/json",
-//             "Content-Type": "application/json"
-//         },
+export const deleteEstablishment = createAsyncThunk("establishments/deleteEstablishment", (establishment) => {
+    return fetch("http://localhost:4000/establishments", {
+        method: 'DELETE',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
         
-//     })
-// })
+    })
+})
 
 
 const establishmentsSlice = createSlice({
@@ -44,11 +44,10 @@ const establishmentsSlice = createSlice({
         //     state.entities.push(action.payload);
         //     // console.log(state, 'this is state')
         // }
-        deleteEstablishment(state, action){
-            const remainingEstablishments = state.entities.filter((e) => e.id !== action.payload.id)
-            console.log('hello')
+        removeEstablishment(state, action){
+            const deletedEstablishmentId = action.payload
+            return state.entities.filter(establishment => establishment.id !== deletedEstablishmentId)
         }
-
     },
     extraReducers: {
         [fetchEstablishments.fulfilled](state, action) {
@@ -71,11 +70,14 @@ const establishmentsSlice = createSlice({
             state.status = "posted"
             console.log(current(state.entities));
             console.log(state);
+        },
+        [deleteEstablishment.fulfilled](state, action) {
+            console.log('deleting in redux')
         }
     },
 })
 
-export const {addEstablishment} = establishmentsSlice.actions;
+export const {addEstablishment, removeEstablishment} = establishmentsSlice.actions;
 
 export default establishmentsSlice.reducer
 
