@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   get '/establishments', to: "establishment#index"
   get '/reviews', to: "review#index"
   get '/users', to: "user#index"
+  get '/establishments/:id', to: "establishment#show"
 
   post '/establishments', to: "establishment#create"
 
   delete '/users/:id', to: "user#delete"
+  delete '/establishments/:id', to: "establishment#delete"
 
   post '/signup', to: "user#create"
   post '/login', to: "session#create"

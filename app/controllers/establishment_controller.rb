@@ -10,6 +10,16 @@ class EstablishmentController < ApplicationController
         render json: establishment
     end
 
+    def delete
+        establishment = Establishment.find_by(id: params[:id])
+        establishment.destroy
+    end
+
+    def show
+        establishment = Establishment.find_by(id: params[:id])
+        render json: establishment
+    end
+
     private
     def est_params
         params.permit(:name, :photo, :establishment_type, :location, :bio, :allows_dogs, :user_id)

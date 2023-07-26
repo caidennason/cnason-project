@@ -20,6 +20,18 @@ export const postEstablishment = createAsyncThunk("establishments/postEstablishm
     .then((data) => data)
 })
 
+// export const deleteEstablishment = createAsyncThunk("establishments/deleteEstablishment", (establishment) => {
+//     return fetch("http://localhost:4000/establishments", {
+//         method: 'DELETE',
+//         headers: {
+//             "Accept": "application/json",
+//             "Content-Type": "application/json"
+//         },
+        
+//     })
+// })
+
+
 const establishmentsSlice = createSlice({
     name: "establishments", 
     initialState:{
@@ -27,10 +39,14 @@ const establishmentsSlice = createSlice({
         status: "idle",
     } ,
     reducers: {
-        addEstablishment(state, action){ // do i need this? since adding is an async (post) function?
-            console.log(action.payload);
-            state.entities.push(action.payload);
-            // console.log(state, 'this is state')
+        // addEstablishment(state, action){ // do i need this? since adding is an async (post) function?
+        //     console.log(action.payload);
+        //     state.entities.push(action.payload);
+        //     // console.log(state, 'this is state')
+        // }
+        deleteEstablishment(state, action){
+            const remainingEstablishments = state.entities.filter((e) => e.id !== action.payload.id)
+            console.log('hello')
         }
 
     },
@@ -51,13 +67,10 @@ const establishmentsSlice = createSlice({
             state.status = "post request failed"
         },
         [postEstablishment.fulfilled](state, action) {
-            console.log(current(state));
             state.entities.push(action.payload);
             state.status = "posted"
             console.log(current(state.entities));
             console.log(state);
-            console.log(action.payload);
-            console.log('checking from post establishment');
         }
     },
 })

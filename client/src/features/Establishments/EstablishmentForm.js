@@ -94,29 +94,3 @@ function EstablishmentForm(){
 }
 
 export default EstablishmentForm
-
-// const handleEstablishmentSubmission = (e) => {
-//     e.preventDefault()
-//     // const establishment = {
-//     //     name: establishmentName, 
-//     //     location: establishmentLocation,
-//     //     establishment_type: establishmentType,
-//     //     bio: establishmentDescription,
-//     //     photo: establishmentPhotoUrl,
-//     //     allows_dogs: allowsDogs,
-//     // };
-//     // dispatch(addEstablishment(establishment))
-//     dispatch(postEstablishment({
-//         name: establishmentName, 
-//         location: establishmentLocation,
-//         establishment_type: establishmentType,
-//         bio: establishmentDescription,
-//         photo: establishmentPhotoUrl,
-//         allows_dogs: allowsDogs,
-//     }))
-//         .then((res) => res)
-//         // .then((data) => {
-//         //     console.log(data, 'sending to rails')
-//         // })
-//         .then((data) => data)
-// }
