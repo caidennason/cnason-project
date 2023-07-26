@@ -17,13 +17,6 @@ function EstablishmentCard({e, e:{name, location, bio, establishment_type, allow
         e.target.src = "https://imgur.com/6Q01PXD"
     }
 
-    // const deleteEstablishment = () => {
-    //     fetch(`http://localhost:4000/establishments/${id}`, {
-    //         method: "DELETE"
-    //     })
-    //     .then((res) => res.json)
-    //     .then((check) => dispatch(deleteEstablishment(id)))
-    // }
 
     return (
         <div>
@@ -32,7 +25,9 @@ function EstablishmentCard({e, e:{name, location, bio, establishment_type, allow
             <CardHeader 
                 title={name}
                 subheader={location}
-                action={<IconButton onClick={() => dispatch(removeEstablishment(e))}>
+                action={<IconButton onClick={() => {
+                    dispatch(deleteEstablishment(e))
+                    }}>
                             <ClearIcon />
                         </IconButton>}
             />

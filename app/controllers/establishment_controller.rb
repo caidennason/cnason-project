@@ -13,6 +13,7 @@ class EstablishmentController < ApplicationController
     def delete
         establishment = Establishment.find_by(id: params[:id])
         establishment.destroy
+        render json: {message: "Establishment deleted."}, status: :ok
     end
 
     def show

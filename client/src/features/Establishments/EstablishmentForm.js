@@ -53,7 +53,7 @@ function EstablishmentForm(){
         setEstablishmentLocation('Location')
         setEstablishmentType('Type (Restaurant, Bar, etc)')
         setEstablishmentPhotoUrl('Photo Url (Optional)')
-        setAllowsDogs(!allowsDogs)
+        setAllowsDogs(true)
     }
 
     const handleEstablishmentSubmission = (e) => {
@@ -66,8 +66,8 @@ function EstablishmentForm(){
             bio: establishmentDescription,
             allows_dogs: allowsDogs,
         }))
-            .then((res) => res)
-            .then((data) => data)
+            // .then((res) => res)
+            // .then((data) => data)
     }
 
     return(

@@ -21,15 +21,12 @@ export const postEstablishment = createAsyncThunk("establishments/postEstablishm
 })
 
 export const deleteEstablishment = createAsyncThunk("establishments/deleteEstablishment", (establishment) => {
-    return fetch("http://localhost:4000/establishments", {
-        method: 'DELETE',
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        
+    return fetch(`http://localhost:4000/establishments/${establishment.id}`, {
+        method: 'DELETE'
     })
-})
+        .then((res) => res.json())
+        .then((data) => data)
+    })
 
 
 const establishmentsSlice = createSlice({
@@ -45,13 +42,11 @@ const establishmentsSlice = createSlice({
         //     // console.log(state, 'this is state')
         // }
         removeEstablishment(state, action){
-            // const deletedEstablishmentId = action.payload
-            // return state.entities.filter(establishment => establishment.id !== deletedEstablishmentId)
             console.log(current(state.entities))
             console.log(action.payload, ' from redux')
             const deletedEstablishment = action.payload
-            let check = state.entities.filter((e) => e.id !== deletedEstablishment.id)
-            state.entities = check
+            let remainingEstablishments = state.entities.filter((e) => e.id !== deletedEstablishment.id)
+            state.entities = remainingEstablishments
         }
     },
     extraReducers: {
@@ -77,7 +72,16 @@ const establishmentsSlice = createSlice({
             console.log(state);
         },
         [deleteEstablishment.fulfilled](state, action) {
-            console.log('deleting in redux')
+            // console.log(current(state.entities))
+            // console.log(action)
+            console.log(current(state.entities))
+            // const deletedEstablishment = action.payload
+            // let remainingEstablishments = state.entities.filter((e) => e.id !== deletedEstablishment.id)
+            // state.entities = remainingEstablishments
+            // state.status = "deleted"
+        },
+        [deleteEstablishment.pending](state, action) {
+            console.log(' pending ')
         }
     },
 })
