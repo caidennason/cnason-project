@@ -10,7 +10,6 @@ import { deleteEstablishment, removeEstablishment } from './establishmentsSlice'
 function EstablishmentCard({e, e:{name, location, bio, establishment_type, allows_dogs, photoUrl, id}}){
 
     const dispatch = useDispatch()
-    const establishments = useSelector((state) => state)
 
     const handleNoImage = (e) => {
         e.target.onerror = null 

@@ -74,7 +74,12 @@ const establishmentsSlice = createSlice({
         [deleteEstablishment.fulfilled](state, action) {
             // console.log(current(state.entities))
             // console.log(action)
-            console.log(current(state.entities))
+            console.log(current(state.entities, ' hello from the slic'))
+            console.log(action.meta.arg, ' hello from the slice payload baby')
+            const deletedEstablishment = action.meta.arg
+            const remainingEstablishments = state.entities.filter((e) => e.id !== deletedEstablishment.id)
+            console.log(remainingEstablishments)
+            state.entities = remainingEstablishments
             // const deletedEstablishment = action.payload
             // let remainingEstablishments = state.entities.filter((e) => e.id !== deletedEstablishment.id)
             // state.entities = remainingEstablishments
