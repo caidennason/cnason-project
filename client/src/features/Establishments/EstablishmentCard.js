@@ -1,19 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
+import EditEstablishment from "./EditEstablishment";
 import { styled } from "@mui/material/styles";
-import { Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button } from "@mui/material"
+import { Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button, Select, InputLabel, TextField, FormControlLabel, NativeSelect, MenuItem, FormControl, Checkbox } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
-import { useDispatch, useSelector } from "react-redux";
-import { deleteEstablishment, removeEstablishment } from './establishmentsSlice';
+import { useDispatch } from "react-redux";
+import { deleteEstablishment } from './establishmentsSlice';
+import SportsBarIcon from '@mui/icons-material/SportsBar';
+import PetsIcon from '@mui/icons-material/Pets';
+import SickIcon from '@mui/icons-material/Sick';
 
 
-function EstablishmentCard({e, e:{name, location, bio, establishment_type, allows_dogs, photoUrl, id}}){
+function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs, id}}){
+
+    console.log(e)
 
     const dispatch = useDispatch()
 
+    const [selectedItem, setSelectedItem] = useState(null)
+    const [updatedDescription, setUpdatedDescription] = useState('')
+    const [updatedName, setUpdatedName] = useState('')
+    const [updatedPhotoUrl, setUpdatedPhotoUrl] = useState('')
+    const [updatedType, setUpdatedType] = useState('')
+    const [updatedAllowsDogs, setUpdatedAllowsDogs] = useState(false)
+
     const handleNoImage = (e) => {
         e.target.onerror = null 
-        e.target.src = "https://imgur.com/6Q01PXD"
+        e.target.src = "https://i.imgur.com/6Q01PXD.jpg"
+    }
+
+    const petsIcon = () => {
+        return <IconButton>
+            <PetsIcon />
+        </IconButton>
+    }
+
+    const sickoIcon = () => {
+        return <IconButton>
+            <SickIcon />
+        </IconButton>
+    }
+
+    const editEstablishmentCard = () => {
+        return <EditEstablishment id={id} name={name} location={location} bio={bio} establishment_type={establishment_type} allows_dogs={allows_dogs} />
+    }
+
+    const handleAllowsDogsChange = (e) => {
+        console.log(e.target.value)
+        setUpdatedAllowsDogs(!updatedAllowsDogs)
+    }
+
+    const submitEdit = (e) => {
+        console.log('hello')
+    }
+
+    const handleDescriptionChange = (e) => {
+        console.log(e.target.value)
+        setUpdatedDescription(e.target.value)
+    }
+
+    const handleNameChange = (e) => {
+        console.log(e.target.value)
+        setUpdatedName(e.target.value)
+    }
+
+    const handlePhotoUrlChange = (e) => {
+        console.log(e.target.value)
+        setUpdatedPhotoUrl(e.target.value)
+    }
+
+    const handleTypeChange = (e) => {
+        console.log(e.target.value)
+        setUpdatedType(e.target.value)
     }
 
 
@@ -33,20 +91,106 @@ function EstablishmentCard({e, e:{name, location, bio, establishment_type, allow
             <CardContent>
                 <Typography>
                    {bio}. Located in {location}. 
-                    <IconButton>
-                        <EditIcon />
-                    </IconButton>
                 </Typography>
                 <CardMedia 
                     component="img"
                     height="194"
-                    image={ photoUrl ? photoUrl : "https://imgur.com/6Q01PXD.jpg" }
+                    image={ photo ? photo : "https://i.imgur.com/6Q01PXD.jpg" }
                     onError={handleNoImage}
                 />
+                <Typography>
+                    {establishment_type ? establishment_type : "user didn/'t specify what type of place this is"}
+                </Typography>
+                <Typography> 
+                    {allows_dogs == true ? (
+                        <>
+                        Bring your dog!{petsIcon()}
+                        </>
+                    ) : (
+                        <>
+                        They don't allow dogs! These people are sickos!{sickoIcon()}
+                        </>
+                    )}
+                </Typography>
             </CardContent>
+            
+                <form>
+                    <FormControl variant="outlined" sx={{boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}>
+                        <Select
+                            IconComponent={EditIcon}
+                            value={selectedItem}
+                            onChange={(e) => setSelectedItem(e.target.value)}
+                        >
+                            <MenuItem value="description">Edit Description</MenuItem>
+                            <MenuItem value="name">Edit Name</MenuItem>
+                            <MenuItem value="photoUrl">Photo Url</MenuItem>
+                            <MenuItem value="establishmentType">Type</MenuItem>
+                            <MenuItem value="allowsDogs">Allows Dogs</MenuItem>
+                        </Select>
+                    </FormControl>
+                </form>
+
+                {selectedItem === 'description' && (
+                    <TextField label="Description" value={updatedDescription} onChange={handleDescriptionChange}/>
+                )}
+                
+                {selectedItem === 'name' && (
+                    <TextField label="Name" value={updatedName} onChange={handleNameChange}/>
+                )}
+
+                {selectedItem === 'photoUrl' && (
+                    <TextField label="Photo Url" value={updatedPhotoUrl} onChange={handlePhotoUrlChange}/>
+                )}
+
+                {selectedItem === 'establishmentType' && (
+                    <TextField label="Type" value={updatedType} onChange={handleTypeChange} />
+                )}
+
+                {selectedItem === 'allowsDogs' && (
+                    <FormControlLabel
+                    control={ <Checkbox checked={updatedAllowsDogs} onChange={handleAllowsDogsChange} /> }
+                    />
+                )}
+
+
+
+                <Button type="submit">Hello</Button>
         </Card >
         </div>
     )
 };
 
 export default EstablishmentCard;
+
+// changing photo to photo url and checking false are breaking post'
+
+{/* <form onSubmit={submitEdit}> */}
+            {/* <Select 
+                sx={{boxShadow:'none', '.MuiOutlinedInput-notchedOutline': { border: 0 }}}
+                IconComponent={EditIcon}
+                >
+                <MenuItem>
+                    <TextField onChange={handleDescriptionChange} label="Description"/>
+                </MenuItem> */}
+                {/* <MenuItem>
+                    <TextField label="Location"/>
+                </MenuItem>
+                <MenuItem>
+                 <TextField label="Photo URL"/>
+                </MenuItem>
+                <MenuItem>
+                    <TextField label="Establishment Type"/>
+                </MenuItem> */}
+                {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                    <InputLabel id="demo-simple-select-label">Allows Dogs</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        // value={updatedAllowsDogs}
+                        label="Allows Dogs"
+                        // onChange={handleAllowsDogsChange}
+                        >
+                        <MenuItem value={true}>Allows Dogs!</MenuItem>
+                        <MenuItem value={false}>Doesn't Allow Dogs</MenuItem>
+                        </Select>
+                </FormControl> */}

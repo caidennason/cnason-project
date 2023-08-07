@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import EditEstablishment from './EditEstablishment';
 import { TextField, Box, Button } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -45,7 +46,7 @@ function EstablishmentForm(){
 
     const handleAllowsDogs = (e) => {
         console.log(e.target.checked)
-        setAllowsDogs(e.target.checked)
+        setAllowsDogs(!allowsDogs)
     }
 
     const reset = () => {

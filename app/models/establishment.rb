@@ -3,7 +3,7 @@ class Establishment < ApplicationRecord
     validates :establishment_type, presence: true
     validates :location, presence: true 
     validates :bio, presence: true 
-    validates :allows_dogs, presence: true 
+    validates :allows_dogs, inclusion: [true, false]
     belongs_to :user, optional: true
     has_many :reviews
     has_many :comments, through: :reviews
@@ -18,5 +18,9 @@ end
 # has_many :reviews -- not causing it
 # has_many :comments, through: :reviews -- was causing it
 # had to make belongs_to :user OPTIONAL! i think since i am not passing a user id yet, it wouldn't get saved to the database
+
+# having an issue with making allows_dogs false. if i comment it out, it updates on the front end. if allows_dogs is false, does
+# that make its presence false? is false present? 
+# ==> line 6 is how you validate a boolean :)
 
 
