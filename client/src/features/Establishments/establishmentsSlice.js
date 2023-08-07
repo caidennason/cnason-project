@@ -28,6 +28,7 @@ export const deleteEstablishment = createAsyncThunk("establishments/deleteEstabl
     })
 
 export const updateEstablishment = createAsyncThunk("establishments/updateEstablishment", (establishment) => {
+    console.log(establishment)
     return fetch(`http://localhost:4000/establishments/${establishment.id}`, {
         method: 'PATCH',
         headers: {
@@ -87,6 +88,14 @@ const establishmentsSlice = createSlice({
         [updateEstablishment.fulfilled](state, action) {
             console.log('fulfilled')
             console.log(action.payload)
+            const updatedEstablishments = state.entities.map((est) => {
+                if (est.id === action.payload.id){
+                    return action.payload
+                } else {
+                    return est
+                }
+            })
+            state.entities = updatedEstablishments
         }
     },
 })

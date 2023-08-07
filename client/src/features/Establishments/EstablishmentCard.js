@@ -30,8 +30,11 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         e.target.src = "https://i.imgur.com/6Q01PXD.jpg"
     }
 
+    const editid = e.id
+    console.log(editid)
+
     const updatedEstablishmentObject = {
-        id: e.id,
+        id: editid,
         name: updatedName, 
         establishment_type: updatedType,
         photo: updatedPhotoUrl, 
@@ -134,7 +137,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 </Typography>
             </CardContent>
             
-                <form onSubmit={(e => submitEdit(e, updatedDescription))}>
+                <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}>
                     <FormControl variant="outlined" sx={{boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}>
                         <Select
                             IconComponent={EditIcon}

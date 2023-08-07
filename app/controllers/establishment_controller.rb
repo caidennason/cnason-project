@@ -25,7 +25,7 @@ class EstablishmentController < ApplicationController
         establishment = Establishment.find_by(id: params[:id])
         establishment.update(est_params)
         if establishment.valid? 
-            render json: establishment, status: :created 
+            render json: establishment
         else 
             render json: {error: "ERROR: Make sure everything is filled out!"}, status: :unprocessable_entity
         end
