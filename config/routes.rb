@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   post '/establishments', to: "establishment#create"
 
+  patch '/establishments/:id', to: "establishment#update"
+
   delete '/users/:id', to: "user#delete"
   delete '/establishments/:id', to: "establishment#delete"
 

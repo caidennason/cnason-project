@@ -21,9 +21,19 @@ class EstablishmentController < ApplicationController
         render json: establishment
     end
 
+    def update
+        establishment = Establishment.find_by(id: params[:id])
+        establishment.update(est_params)
+        if establishment.valid? 
+            render json: establishment, status: :created 
+        else 
+            render json: {error: "ERROR: Make sure everything is filled out!"}, status: :unprocessable_entity
+        end
+    end
+
     private
     def est_params
-        params.permit(:name, :photo, :establishment_type, :location, :bio, :allows_dogs, :user_id)
+        params.permit(:id, :name, :photo, :establishment_type, :location, :bio, :allows_dogs, :user_id)
     end
 
 end

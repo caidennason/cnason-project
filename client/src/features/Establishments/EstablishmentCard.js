@@ -5,7 +5,7 @@ import { Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Butto
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch } from "react-redux";
-import { deleteEstablishment } from './establishmentsSlice';
+import { deleteEstablishment, updateEstablishment } from './establishmentsSlice';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import PetsIcon from '@mui/icons-material/Pets';
 import SickIcon from '@mui/icons-material/Sick';
@@ -18,16 +18,29 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     const dispatch = useDispatch()
 
     const [selectedItem, setSelectedItem] = useState(null)
-    const [updatedDescription, setUpdatedDescription] = useState('')
-    const [updatedName, setUpdatedName] = useState('')
-    const [updatedPhotoUrl, setUpdatedPhotoUrl] = useState('')
-    const [updatedType, setUpdatedType] = useState('')
-    const [updatedAllowsDogs, setUpdatedAllowsDogs] = useState(false)
+    const [updatedDescription, setUpdatedDescription] = useState(bio)
+    const [updatedName, setUpdatedName] = useState(name)
+    const [updatedPhotoUrl, setUpdatedPhotoUrl] = useState(photo)
+    const [updatedType, setUpdatedType] = useState(establishment_type)
+    const [updatedLocation, setUpdatedLocation] = useState(location)
+    const [updatedAllowsDogs, setUpdatedAllowsDogs] = useState(allows_dogs)
 
     const handleNoImage = (e) => {
         e.target.onerror = null 
         e.target.src = "https://i.imgur.com/6Q01PXD.jpg"
     }
+
+    const updatedEstablishmentObject = {
+        id: e.id,
+        name: updatedName, 
+        establishment_type: updatedType,
+        photo: updatedPhotoUrl, 
+        allows_dogs: updatedAllowsDogs,
+        bio: updatedDescription,
+        location: updatedLocation
+    }
+
+    console.log(updatedEstablishmentObject, ' hello this is the updated object ')
 
     const petsIcon = () => {
         return <IconButton>
@@ -41,17 +54,19 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         </IconButton>
     }
 
-    const editEstablishmentCard = () => {
-        return <EditEstablishment id={id} name={name} location={location} bio={bio} establishment_type={establishment_type} allows_dogs={allows_dogs} />
-    }
+    // const editEstablishmentCard = () => {
+    //     return <EditEstablishment id={id} name={name} location={location} bio={bio} establishment_type={establishment_type} allows_dogs={allows_dogs} />
+    // }
 
     const handleAllowsDogsChange = (e) => {
         console.log(e.target.value)
         setUpdatedAllowsDogs(!updatedAllowsDogs)
     }
 
-    const submitEdit = (e) => {
-        console.log('hello')
+    const submitEdit = (e, updatedEstablishmentObject) => {
+        e.preventDefault()
+        dispatch(updateEstablishment(updatedEstablishmentObject))
+        console.log(updatedEstablishmentObject)
     }
 
     const handleDescriptionChange = (e) => {
@@ -74,6 +89,11 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         setUpdatedType(e.target.value)
     }
 
+    const handleLocationChange = (e) => {
+        console.log(e.target.value)
+        setUpdatedLocation(e.target.value)
+    }
+
 
     return (
         <div>
@@ -81,7 +101,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         <Card sx={{ maxWidth: 345, bgcolor: "peachpuff" }}>
             <CardHeader 
                 title={name}
-                subheader={location}
+                subheader={`Located in ${location}`}
                 action={<IconButton onClick={() => {
                     dispatch(deleteEstablishment(e))
                     }}>
@@ -114,7 +134,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 </Typography>
             </CardContent>
             
-                <form>
+                <form onSubmit={(e => submitEdit(e, updatedDescription))}>
                     <FormControl variant="outlined" sx={{boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}>
                         <Select
                             IconComponent={EditIcon}
@@ -123,11 +143,13 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                         >
                             <MenuItem value="description">Edit Description</MenuItem>
                             <MenuItem value="name">Edit Name</MenuItem>
-                            <MenuItem value="photoUrl">Photo Url</MenuItem>
-                            <MenuItem value="establishmentType">Type</MenuItem>
-                            <MenuItem value="allowsDogs">Allows Dogs</MenuItem>
+                            <MenuItem value="photoUrl">Edit Photo Url</MenuItem>
+                            <MenuItem value="establishmentType">Edit Type</MenuItem>
+                            <MenuItem value="location">Edit Location</MenuItem>
+                            <MenuItem value="allowsDogs">Edit Allows Dogs</MenuItem>
                         </Select>
                     </FormControl>
+                    <Button type="submit" color='inherit' sx={{marginTop: '10px'}} variant='outlined'>Edit</Button>
                 </form>
 
                 {selectedItem === 'description' && (
@@ -146,15 +168,17 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                     <TextField label="Type" value={updatedType} onChange={handleTypeChange} />
                 )}
 
+                {selectedItem === 'location' && (
+                    <TextField label="Location" value={updatedLocation} onChange={handleLocationChange}/>
+                )}
+
                 {selectedItem === 'allowsDogs' && (
                     <FormControlLabel
                     control={ <Checkbox checked={updatedAllowsDogs} onChange={handleAllowsDogsChange} /> }
+                    label={updatedAllowsDogs ? "Allows Dogs" : "Doesn't allow dogs"}
                     />
                 )}
 
-
-
-                <Button type="submit">Hello</Button>
         </Card >
         </div>
     )

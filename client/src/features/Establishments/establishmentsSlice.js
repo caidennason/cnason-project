@@ -29,7 +29,11 @@ export const deleteEstablishment = createAsyncThunk("establishments/deleteEstabl
 
 export const updateEstablishment = createAsyncThunk("establishments/updateEstablishment", (establishment) => {
     return fetch(`http://localhost:4000/establishments/${establishment.id}`, {
-        method: 'PATCH'
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(establishment)
     })
         .then((res) => res.json())
         .then((data) => data)
@@ -78,9 +82,11 @@ const establishmentsSlice = createSlice({
         },
         [updateEstablishment.pending](state, action) {
             console.log('pending')
+            console.log(action.payload)
         },
         [updateEstablishment.fulfilled](state, action) {
             console.log('fulfilled')
+            console.log(action.payload)
         }
     },
 })
