@@ -5,10 +5,11 @@ import { Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Butto
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch } from "react-redux";
-import { deleteEstablishment, updateEstablishment } from './establishmentsSlice';
+import establishmentsSlice, { deleteEstablishment, updateEstablishment } from './establishmentsSlice';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import PetsIcon from '@mui/icons-material/Pets';
 import SickIcon from '@mui/icons-material/Sick';
+import Reviews from "../Reviews/Reviews";
 
 
 function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs, id}}){
@@ -31,7 +32,6 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     }
 
     const editid = e.id
-    console.log(editid)
 
     const updatedEstablishmentObject = {
         id: editid,
@@ -183,6 +183,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 )}
 
         </Card >
+                    <Reviews establishments={e}/>
         </div>
     )
 };

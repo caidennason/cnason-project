@@ -4,9 +4,9 @@ class Establishment < ApplicationRecord
     validates :location, presence: true 
     validates :bio, presence: true 
     validates :allows_dogs, inclusion: [true, false]
-    # belongs_to :user, optional: true
-    # has_many :reviews
-    # has_many :comments, through: :reviews
+    belongs_to :user, optional: true
+    has_many :reviews
+    has_many :comments, through: :reviews
 end
 
 # works when allows_dogs is commented out 
