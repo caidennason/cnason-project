@@ -40,11 +40,25 @@ export const updateEstablishment = createAsyncThunk("establishments/updateEstabl
         .then((data) => data)
 })
 
+export const postReview = createAsyncThunk("reveiws/postReview", (review) => {
+    return fetch("http://localhost:4000/reviews", {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(review)
+    })
+    .then((res) => res.json())
+    .then((data) => data)
+})
+
 
 const establishmentsSlice = createSlice({
     name: "establishments", 
     initialState:{
         entities: [],
+        reviews: {},
         status: "idle",
     } ,
     reducers: {
@@ -58,6 +72,7 @@ const establishmentsSlice = createSlice({
         [fetchEstablishments.fulfilled](state, action) {
             state.entities = action.payload;
             state.status = "loaded";
+            console.log(state.entities)
         },
         [fetchEstablishments.pending](state, action){
             state.status = "loading...";
@@ -96,6 +111,18 @@ const establishmentsSlice = createSlice({
                 }
             })
             state.entities = updatedEstablishments
+        },
+        [postReview.pending](state, action){
+            console.log(' pending ')
+        },
+        [postReview.fulfilled](state, action){
+            console.log(action.payload)
+            console.log(current(state.entities))
+            const { establishment_id, ...review } = action.payload; // destructuring the object here.so basically, you're taking the establishment id from this action.payload object, and saving that to a variable called 'establishment_id'. you're saving the rest of the object to 'review'. then, you're finding an establishment from state.entities that has the same id as establishment_id. if that establishment exists, you push the review to the end of the reviews
+            const establishment = state.entities.find((e) => e.id === establishment_id);
+            if (establishment) {
+              establishment.reviews.push(review);
+            }
         }
     },
 })

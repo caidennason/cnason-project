@@ -8,8 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, TextField, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { postReview } from './reviewsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { postReview } from '../Establishments/establishmentsSlice';
+import ReviewCard from './ReviewCard';
 
 function Reviews({establishments, name}){
 
@@ -30,9 +31,6 @@ function Reviews({establishments, name}){
         }),
       }));
 
-    const establishmentReviews = establishments.reviews.map((reviews) => {
-        return reviews.content
-    })
 
     const [expanded, setExpanded] = useState(false);
 
@@ -42,7 +40,6 @@ function Reviews({establishments, name}){
 
     const handleReviewChange = (e) => {
         setReviewContent(e.target.value)
-        console.log(reviewContent)
     }
 
     const handleReviewSubmit = (e) => {
@@ -53,6 +50,7 @@ function Reviews({establishments, name}){
         }
         console.log(reviewObject)
         dispatch(postReview(reviewObject))
+        console.log(establishments.reviews)
     }
 
     return (
@@ -73,9 +71,9 @@ function Reviews({establishments, name}){
         </CardActions>
     <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-            <Typography paragraph>
-                {establishmentReviews}
-            </Typography>
+            {establishments.reviews.map((reviews) => {
+                return <ReviewCard reviews={reviews}/>
+            })}
         </CardContent>
     <form onSubmit={handleReviewSubmit}>
         <Box>
@@ -91,6 +89,10 @@ function Reviews({establishments, name}){
 
     
 }
+
+// {establishments.reviews.map((review) => (
+//     <ReviewCard key={review.id} review={review} />
+//   ))}
 
 
 

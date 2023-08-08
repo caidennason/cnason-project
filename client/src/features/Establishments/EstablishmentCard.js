@@ -102,6 +102,8 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         setUpdatedLocation(e.target.value)
     };
 
+    console.log(e.reviews)
+
 
     return (
         <div>
