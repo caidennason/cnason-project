@@ -14,24 +14,35 @@ import Reviews from "../Reviews/Reviews";
 
 function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs, id}}){
 
-    console.log(e)
-
     const dispatch = useDispatch()
 
-    const [selectedItem, setSelectedItem] = useState(null)
-    const [updatedDescription, setUpdatedDescription] = useState(bio)
-    const [updatedName, setUpdatedName] = useState(name)
-    const [updatedPhotoUrl, setUpdatedPhotoUrl] = useState(photo)
-    const [updatedType, setUpdatedType] = useState(establishment_type)
-    const [updatedLocation, setUpdatedLocation] = useState(location)
-    const [updatedAllowsDogs, setUpdatedAllowsDogs] = useState(allows_dogs)
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    const handleNextPage = () => {
+        setCurrentPage(currentPage + 1)
+    };
+
+    const handlePreviousPage = () => {
+        setCurrentPage(currentPage - 1)
+    };
+
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [updatedDescription, setUpdatedDescription] = useState(bio);
+    const [updatedName, setUpdatedName] = useState(name);
+    const [updatedPhotoUrl, setUpdatedPhotoUrl] = useState(photo);
+    const [updatedType, setUpdatedType] = useState(establishment_type);
+    const [updatedLocation, setUpdatedLocation] = useState(location);
+    const [updatedAllowsDogs, setUpdatedAllowsDogs] = useState(allows_dogs);
 
     const handleNoImage = (e) => {
         e.target.onerror = null 
         e.target.src = "https://i.imgur.com/6Q01PXD.jpg"
-    }
+    };
 
-    const editid = e.id
+    const editid = e.id;
 
     const updatedEstablishmentObject = {
         id: editid,
@@ -41,61 +52,55 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         allows_dogs: updatedAllowsDogs,
         bio: updatedDescription,
         location: updatedLocation
-    }
-
-    console.log(updatedEstablishmentObject, ' hello this is the updated object ')
+    };
 
     const petsIcon = () => {
         return <IconButton>
             <PetsIcon />
         </IconButton>
-    }
+    };
 
     const sickoIcon = () => {
         return <IconButton>
             <SickIcon />
         </IconButton>
-    }
-
-    // const editEstablishmentCard = () => {
-    //     return <EditEstablishment id={id} name={name} location={location} bio={bio} establishment_type={establishment_type} allows_dogs={allows_dogs} />
-    // }
+    };
 
     const handleAllowsDogsChange = (e) => {
         console.log(e.target.value)
         setUpdatedAllowsDogs(!updatedAllowsDogs)
-    }
+    };
 
     const submitEdit = (e, updatedEstablishmentObject) => {
         e.preventDefault()
         dispatch(updateEstablishment(updatedEstablishmentObject))
         console.log(updatedEstablishmentObject)
-    }
+    };
 
     const handleDescriptionChange = (e) => {
         console.log(e.target.value)
         setUpdatedDescription(e.target.value)
-    }
+    };
 
     const handleNameChange = (e) => {
         console.log(e.target.value)
         setUpdatedName(e.target.value)
-    }
+    };
 
     const handlePhotoUrlChange = (e) => {
         console.log(e.target.value)
         setUpdatedPhotoUrl(e.target.value)
-    }
+    };
 
     const handleTypeChange = (e) => {
         console.log(e.target.value)
         setUpdatedType(e.target.value)
-    }
+    };
 
     const handleLocationChange = (e) => {
         console.log(e.target.value)
         setUpdatedLocation(e.target.value)
-    }
+    };
 
 
     return (
@@ -183,8 +188,10 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 )}
 
         </Card >
-                    <Reviews establishments={e}/>
+                    <Reviews establishments={e} name={e.name}/>
+                    
         </div>
+        
     )
 };
 

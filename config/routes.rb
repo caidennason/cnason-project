@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/establishments/:id', to: "establishment#show"
 
   post '/establishments', to: "establishment#create"
+  post '/reviews', to: "review#create"
 
   patch '/establishments/:id', to: "establishment#update"
 
