@@ -116,8 +116,6 @@ const establishmentsSlice = createSlice({
             console.log(' pending ')
         },
         [postReview.fulfilled](state, action){
-            console.log(action.payload)
-            console.log(current(state.entities))
             const { establishment_id, ...review } = action.payload; // destructuring the object here.so basically, you're taking the establishment id from this action.payload object, and saving that to a variable called 'establishment_id'. you're saving the rest of the object to 'review'. then, you're finding an establishment from state.entities that has the same id as establishment_id. if that establishment exists, you push the review to the end of the reviews
             const establishment = state.entities.find((e) => e.id === establishment_id);
             if (establishment) {

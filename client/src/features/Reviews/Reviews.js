@@ -48,9 +48,8 @@ function Reviews({establishments, name}){
             content: reviewContent, 
             establishment_id:establishments.id
         }
-        console.log(reviewObject)
         dispatch(postReview(reviewObject))
-        console.log(establishments.reviews)
+        setReviewContent('')
     }
 
     return (
@@ -75,6 +74,7 @@ function Reviews({establishments, name}){
                 return <ReviewCard reviews={reviews}/>
             })}
         </CardContent>
+        
     <form onSubmit={handleReviewSubmit}>
         <Box>
             <TextField onChange={handleReviewChange} multiline id='outlined-multiline-flexible' maxrows={100} sx={{marginLeft: '5px', marginBottom: '2px'}} label="Submit a review!"/>   

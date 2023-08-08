@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addUser } from './userSlice';
+import { signup } from './userSlice';
 
 
 function Signup(){
@@ -16,32 +16,26 @@ function Signup(){
     const dispatch = useDispatch()
 
     const handleUsername = (e) => {
-        console.log(e.target.value)
         setUsername(e.target.value)
     }
 
     const handlePassword = (e) => {
-        console.log(e.target.value)
         setPassword(e.target.value)
     }
 
     const handlePasswordConfirmation = (e) => {
-        console.log(e.target.value)
         setPasswordConfirmation(e.target.value)
     }
 
     const handleLocation = (e) => {
-        console.log(e.target.value)
         setLocation(e.target.value)
     }
 
     const handleBio = (e) => {
-        console.log(e.target.value)
         setBio(e.target.value)
     }
 
     const handlePhotoUrl = (e) => {
-        console.log(e.target.value)
         setPhotoUrl(e.target.value)
     }
 
@@ -49,14 +43,14 @@ function Signup(){
         e.preventDefault()
         console.log('check')
         const user = {
-            username, 
-            password, 
-            passwordConfirmation, 
-            location, 
-            bio, 
-            photoUrl
+            name: username, 
+            password: password, 
+            password_confirmation: passwordConfirmation, 
+            location: location, 
+            bio: bio, 
+            photo: photoUrl
         }
-        dispatch(addUser(user))
+        dispatch(signup(user))
     }
 
     return(
