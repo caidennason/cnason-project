@@ -58,6 +58,7 @@ function EstablishmentForm(){
     }
 
     const handleEstablishmentSubmission = (e) => {
+        console.log('click')
         e.preventDefault()
         dispatch(postEstablishment({
             name: establishmentName, 

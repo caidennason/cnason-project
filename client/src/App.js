@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { Typography, Button, AppBar, Toolbar, IconButton, Stack, Avatar } from '@mui/material';
 import MenuIcon from '@mui/material/Menu';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from './features/Users/userSlice';
 
 
 
@@ -20,11 +22,21 @@ function App() {
     setNumber(number+1)
   }
 
+  const currentUser = useSelector((state) => state.currentUser)
+  console.log(currentUser)
+  const dispatch = useDispatch()
+
+  const handleSignout = (e) => {
+    e.preventDefault()
+    dispatch(signout())
+  }
+
 
   return (
     <div className="App">
       {number}
       <Button variant="contained" onClick={addOne}>PLEASE</Button>
+      <Button onClick={handleSignout}>Logout</Button>
     <Router>
 
     <AppBar position="static">

@@ -8,6 +8,8 @@ import { Grid } from '@mui/material';
 function Establishments() {
     const establishments = useSelector((state) => state.establishments.entities);
     const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.currentUser)
+    console.log(currentUser, 'hello ')
   
     useEffect(() => {
       dispatch(fetchEstablishments());

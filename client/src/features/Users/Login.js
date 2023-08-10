@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from './userSlice';
 import { fetchEstablishments } from '../Establishments/establishmentsSlice';
-import { getUsers } from './userSlice';
+import { getUsers, getCurrentUser } from './userSlice';
 
 function Login(){
 
@@ -13,26 +13,28 @@ function Login(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    // useEffect(() => {
+    //     dispatch(getUsers())
+    // }, [dispatch]);
+
     useEffect(() => {
-        dispatch(getUsers())
-    }, [dispatch]);
+        dispatch(getCurrentUser())
+    }, [dispatch])
 
     const handleUsernameChange = (e) => {
-        console.log(e.target.value)
         setUsername(e.target.value)
     }
 
     const handlePasswordChange = (e) => {
-        console.log(e.target.value)
         setPassword(e.target.value)
     }
 
     const handleLogin = () => {
         console.log('clicked')
-        navigate('/profile')
+        // navigate('/profile')
         const user = {
-            username, 
-            password
+            name: username, 
+            password: password
         }
         dispatch(userLogin(user))
     }
