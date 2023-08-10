@@ -37,8 +37,11 @@ function Login(){
             <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Log In</h2>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <TextField required onChange={handleUsernameChange} id="outlined-basic" label="Username" variant="outlined" />
+            </Box>
+            <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <TextField required onChange={handlePasswordChange} id="filled-basic" label="Password" variant="outlined" />
             </Box>
+            <br></br>
             <Box variant='contained' style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Button onClick={handleLogin} variant='contained' style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Sign in</Button>
             </Box>

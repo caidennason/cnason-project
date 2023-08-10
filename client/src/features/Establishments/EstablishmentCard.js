@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EditEstablishment from "./EditEstablishment";
 import { styled } from "@mui/material/styles";
-import { Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button, Select, InputLabel, TextField, FormControlLabel, NativeSelect, MenuItem, FormControl, Checkbox } from "@mui/material"
+import { Grid, Item, Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button, Select, InputLabel, TextField, FormControlLabel, NativeSelect, MenuItem, FormControl, Checkbox } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch } from "react-redux";
@@ -191,7 +191,6 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
 
         </Card >
                     <Reviews establishments={e} name={e.name}/>
-                    
         </div>
         
     )
