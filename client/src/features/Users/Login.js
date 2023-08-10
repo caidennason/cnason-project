@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, TextField, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from './userSlice';
+import { fetchEstablishments } from '../Establishments/establishmentsSlice';
+import { getUsers } from './userSlice';
 
 function Login(){
 
@@ -10,6 +12,10 @@ function Login(){
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        dispatch(getUsers())
+    }, [dispatch]);
 
     const handleUsernameChange = (e) => {
         console.log(e.target.value)

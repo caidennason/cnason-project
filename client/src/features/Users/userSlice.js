@@ -6,6 +6,12 @@ export const userLogin = createAsyncThunk("users/userLogin", (user) => {
 
 })
 
+export const getUsers = createAsyncThunk("users/getUsers", (user) => {
+    return fetch("http://localhost:4000/users",)
+        .then((res) => res.json())
+        .then((data => data))
+    })
+
 export const signup = createAsyncThunk("users/signup", (user) => {
     return fetch("http://localhost:4000/signup", {
         method: "POST",
@@ -29,6 +35,9 @@ const usersSlice = createSlice({
 
     },
     extraReducers: {
+        [getUsers.fulfilled](state, action) {
+            console.log(action.payload)
+        },
         [userLogin.fulfilled](state, action) {
             console.log(action.payload)
         },
