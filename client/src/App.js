@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Establishments from './features/Establishments/Establishments';
 import User from './features/Users/User';
 import HomePage from './features/Home/HomePage';
@@ -11,6 +11,8 @@ import { Typography, Button, AppBar, Toolbar, IconButton, Stack, Avatar } from '
 import MenuIcon from '@mui/material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from './features/Users/userSlice';
+import userSlice from './features/Users/userSlice';
+import { getUsers, getCurrentUser } from './features/Users/userSlice';
 
 
 
@@ -22,13 +24,18 @@ function App() {
     setNumber(number+1)
   }
 
-  const currentUser = useSelector((state) => state.currentUser)
+  const currentUser = useSelector((state) => state.signups.currentUser)
   console.log(currentUser)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+}, [dispatch])
 
   const handleSignout = (e) => {
     e.preventDefault()
     dispatch(signout())
+    console.log(currentUser)
   }
 
 
