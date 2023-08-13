@@ -31,7 +31,7 @@ class UserController < ApplicationController
         user = User.find_by(id: params[:id])
         if user.id == u.id 
             user.destroy
-            rener json: {message: "User has been deleted."}, status: :ok 
+            render json: {message: "User has been deleted."}, status: :ok 
         else
             render json: {error: "ERROR: You can only delete your own profile."}, status: :not_found
         end

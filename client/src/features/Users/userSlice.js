@@ -54,7 +54,7 @@ const usersSlice = createSlice({
     name: "users", 
     initialState:{
         entities: [],
-        currentUser: null,
+        currentUser: false,
         status: "idle",
     } ,
     reducers: {
@@ -66,49 +66,41 @@ const usersSlice = createSlice({
         },
         [userLogin.fulfilled](state, action) {
             console.log(action.payload)
+            // state.currentUser = action.payload
+            return {
+                ...state, 
+                currentUser: action.payload
+            }
         },
         [signup.fulfilled](state, action) {
             console.log(action.payload)
+            state.entities.push(action.payload)
+            state.currentUser = action.payload
         },
         [getCurrentUser.fulfilled](state, action) {
             console.log(action.payload)
-            state.currentUser = action.payload
+            // state.currentUser = action.payload
+            return {
+                ...state, 
+                currentUser: action.payload
+            }
+            console.log(state.currentUser)
+        },
+        [getCurrentUser.pending](state, action) { 
+            console.log(' current user is pending ')
         },
         [signout.fulfilled](state, action) {
-            console.log(state.currentUser)
             state.currentUser = null
-            console.log(state.currentUser)
+            console.log('you are signed out')
+        }, 
+        [signout.pending](state, action) {
+            console.log(' you are being signed out, slowly but surely ')
+            console.log(current(state.currentUser))
+        },
+        [signout.rejected](state, action) {
+            console.log('error is happening on the signout')
         }
     }
 })
 
 export default usersSlice.reducer
-
-// export const addUser = (user) => {
-//     return {
-//         type: "user/signUp", 
-//         payload: user,
-//     };
-// };
-
-// export const userLogin = (user) => {
-//     return {
-//         type: "user/login", 
-//         payload: user
-//     };
-// };
-
-// const initialState = [];
-
-// export default function userReducer(state = initialState, action){
-//     switch(action.type) {
-//         case "user/signUp":
-//             console.log(action.payload)
-
-//         case "user/login":
-//             console.log(action.payload)
-
-//         default: 
-//             return state
-//     }
-// }

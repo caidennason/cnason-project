@@ -1,8 +1,10 @@
 class EstablishmentController < ApplicationController
 
+    before_action :authorized
+
     def index 
-        establishments = Establishment.all 
-        render json: establishments
+        establishments = Establishment.includes(:user, reviews: :user).all 
+        render json: establishments, include: ['user', 'reviews.user']
     end
 
     def create
@@ -12,8 +14,12 @@ class EstablishmentController < ApplicationController
 
     def delete
         establishment = Establishment.find_by(id: params[:id])
-        establishment.destroy
-        render json: {message: "Establishment deleted."}, status: :ok
+        if establishment.user_id == current_user.id 
+            establishment.destroy
+            render json: {message: "Establishment deleted."}, status: :ok
+        else 
+            render json: { error: "You can only delete an establishment you created."}, status: :unauthorized 
+        end
     end
 
     def show

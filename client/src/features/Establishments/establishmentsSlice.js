@@ -23,8 +23,15 @@ export const deleteEstablishment = createAsyncThunk("establishments/deleteEstabl
     return fetch(`http://localhost:4000/establishments/${establishment.id}`, {
         method: 'DELETE'
     })
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("unable to delete establishment")
+            }
+            return res.json()
+        })
         .then((data) => data)
+        // .then((res) => res.json())
+        // .then((data) => data)
     })
 
 export const updateEstablishment = createAsyncThunk("establishments/updateEstablishment", (establishment) => {
@@ -92,6 +99,9 @@ const establishmentsSlice = createSlice({
             const remainingEstablishments = state.entities.filter((e) => e.id !== deletedEstablishment.id);
             state.entities = remainingEstablishments;
             state.status = 'deleted';
+        },
+        [deleteEstablishment.rejected](state, action) { 
+            console.log( ' unable to delete ', action.error.message)
         },
         [deleteEstablishment.pending](state, action) {
             console.log(' pending ');

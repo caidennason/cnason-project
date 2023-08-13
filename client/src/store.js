@@ -7,7 +7,7 @@ const store = configureStore({
     reducer: {
         establishments: establishmentsReducer,
         reviews: reviewsReducer,
-        signups: userReducer
+        users: userReducer
     }
 })
 

@@ -13,14 +13,6 @@ function Login(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    // useEffect(() => {
-    //     dispatch(getUsers())
-    // }, [dispatch]);
-
-    useEffect(() => {
-        dispatch(getCurrentUser())
-    }, [dispatch])
-
     const handleUsernameChange = (e) => {
         setUsername(e.target.value)
     }
@@ -31,12 +23,12 @@ function Login(){
 
     const handleLogin = () => {
         console.log('clicked')
-        // navigate('/profile')
         const user = {
             name: username, 
             password: password
         }
         dispatch(userLogin(user))
+        navigate('/profile')
     }
 
     return(

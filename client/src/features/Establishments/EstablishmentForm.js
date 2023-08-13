@@ -4,7 +4,7 @@ import { TextField, Box, Button } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {  postEstablishment } from './establishmentsSlice';
 
 
@@ -18,6 +18,9 @@ function EstablishmentForm(){
     const [allowsDogs, setAllowsDogs] = useState(true)
 
     const dispatch = useDispatch();
+
+    const currentUser = useSelector((state) => state.users.currentUser)
+    console.log(currentUser)
 
     const handleEstablishmentNameChange = (e) => {
         console.log(e.target.value)
@@ -67,6 +70,7 @@ function EstablishmentForm(){
             location: establishmentLocation,
             bio: establishmentDescription,
             allows_dogs: allowsDogs,
+            user_id: currentUser.id
         }))
             // .then((res) => res)
             // .then((data) => data)

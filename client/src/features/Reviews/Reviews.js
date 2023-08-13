@@ -14,11 +14,14 @@ import ReviewCard from './ReviewCard';
 
 function Reviews({establishments, name}){
 
-    console.log(establishments)
+    // console.log(establishments)
 
     const [reviewContent, setReviewContent] = useState('')
 
     const dispatch = useDispatch();
+
+    const currentUser = useSelector((state) => state.users.currentUser)
+    console.log(currentUser, ' current user from the review component ')
 
     const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
@@ -46,7 +49,8 @@ function Reviews({establishments, name}){
         e.preventDefault()
         const reviewObject = {
             content: reviewContent, 
-            establishment_id:establishments.id
+            establishment_id: establishments.id,
+            user_id: currentUser.id
         }
         dispatch(postReview(reviewObject))
         setReviewContent('')
@@ -71,7 +75,8 @@ function Reviews({establishments, name}){
     <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
             {establishments.reviews.map((reviews) => {
-                return <ReviewCard reviews={reviews}/>
+                const user = establishments.user
+                return <ReviewCard reviews={reviews} user={user}/>
             })}
         </CardContent>
         

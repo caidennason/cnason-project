@@ -11,55 +11,59 @@ import { Typography, Button, AppBar, Toolbar, IconButton, Stack, Avatar } from '
 import MenuIcon from '@mui/material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from './features/Users/userSlice';
-import userSlice from './features/Users/userSlice';
-import { getUsers, getCurrentUser } from './features/Users/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { getCurrentUser } from './features/Users/userSlice';
 
 
 
 function App() {
 
-  const [number, setNumber] = useState(0);
+  // const [number, setNumber] = useState(0);
 
-  const addOne = () => {
-    setNumber(number+1)
-  }
+  // const addOne = () => {
+  //   setNumber(number+1)
+  // }
 
-  const currentUser = useSelector((state) => state.signups.currentUser)
-  console.log(currentUser)
+  const navigate = useNavigate()
+
+  const currentUser = useSelector((state) => state.users.currentUser)
+  // console.log(currentUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('dispatching get current user from app')
     dispatch(getCurrentUser())
-}, [dispatch])
+    console.log(' request has been made, this is the current user: ', currentUser)
+}, [])
 
-  const handleSignout = (e) => {
-    e.preventDefault()
+console.log(currentUser, ' checking the current user outside of the useEffect')
+
+  const handleSignout = () => {
+    console.log(' clicking the signout button ... ')
     dispatch(signout())
-    console.log(currentUser)
+    navigate('/login')
   }
 
 
   return (
     <div className="App">
-      {number}
-      <Button variant="contained" onClick={addOne}>PLEASE</Button>
-      <Button onClick={handleSignout}>Logout</Button>
-    <Router>
+      {/* {number}
+      <Button variant="contained" onClick={addOne}>PLEASE</Button> */}
+      {currentUser ? <Button onClick={handleSignout}>Logout</Button> : ' '}
+      {currentUser ? `Signed in as ${currentUser.name}` : ' '}
+    {/* <Router> */}
 
     <AppBar position="static">
       <Toolbar>
-        {/* <IconButton size="large" edge="start" color="inherit" aria-label="logo">
-          <AcUnitIcon />
-        </IconButton> */}
         <Avatar src='https://imgur.com/6Q01PXD.jpg' /> 
         <Typography variant='h6' style={{textDecoration: 'none'}}color='inherit' component={Link} to='/' sx={{flexGrow: 1}}>
           Dog Friendly
         </Typography>
         <Stack direction='row' spacing={2} >
-          <Button color='inherit' component={Link} to='/'>Home</Button>
-          <Button color='inherit' component={Link} to='/establishments'>Establishments</Button>
-          <Button color='inherit' component={Link} to='/profile'>Profile</Button>
-          <Button color='inherit' component={Link} to='/login'>Login</Button>
+          {<Button color='inherit' component={Link} to='/'>Home</Button>}
+          {currentUser ? <Button color='inherit' component={Link} to='/establishments'>Establishments</Button> : ' '}
+          {currentUser ? <Button color='inherit' component={Link} to='/profile'>Profile</Button> : ' '}
+          {!currentUser ? <Button color='inherit' component={Link} to='/login'>Login</Button> : ' '}
           <Button color='inherit' component={Link} to='/signup'>Signup</Button>
         </Stack>
       </Toolbar>
@@ -72,7 +76,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path='/signup' element={<Signup/>}/>
       </Routes>
-    </Router>
+    {/* </Router> */}
     </div>
   );
 }
