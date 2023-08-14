@@ -32,12 +32,3 @@ function Establishments() {
   
   export default Establishments;
 
-            //     <Button onClick={handlePreviousPage} disabled={currentPage === 1}>
-            //     <ArrowBackIcon />
-            //   </Button>
-            //   <Button
-            //     onClick={handleNextPage}
-            //     disabled={endIndex >= e.length}
-            //   >
-            //     <ArrowForwardIcon />
-            //   </Button>

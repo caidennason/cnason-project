@@ -6,7 +6,7 @@ export const getReviews = createAsyncThunk("reviews/fetchReviews", () => {
     .then((data) => data)
 })
 
-export const postReview = createAsyncThunk("reveiws/postReview", (review) => {
+export const postReview = createAsyncThunk("reviews/postReview", (review) => {
     return fetch("http://localhost:4000/reviews", {
         method: 'POST',
         headers: {

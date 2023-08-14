@@ -79,11 +79,11 @@ const usersSlice = createSlice({
         },
         [getCurrentUser.fulfilled](state, action) {
             console.log(action.payload)
-            // state.currentUser = action.payload
-            return {
-                ...state, 
-                currentUser: action.payload
-            }
+            state.currentUser = action.payload
+            // return {
+            //     ...state, 
+            //     currentUser: action.payload
+            // }
             console.log(state.currentUser)
         },
         [getCurrentUser.pending](state, action) { 

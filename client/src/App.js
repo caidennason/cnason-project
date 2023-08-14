@@ -31,10 +31,10 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('dispatching get current user from app')
+    // console.log('dispatching get current user from app')
     dispatch(getCurrentUser())
-    console.log(' request has been made, this is the current user: ', currentUser)
-}, [])
+    // console.log(' request has been made, this is the current user: ', currentUser)
+}, [dispatch])
 
 console.log(currentUser, ' checking the current user outside of the useEffect')
 
@@ -64,7 +64,7 @@ console.log(currentUser, ' checking the current user outside of the useEffect')
           {currentUser ? <Button color='inherit' component={Link} to='/establishments'>Establishments</Button> : ' '}
           {currentUser ? <Button color='inherit' component={Link} to='/profile'>Profile</Button> : ' '}
           {!currentUser ? <Button color='inherit' component={Link} to='/login'>Login</Button> : ' '}
-          <Button color='inherit' component={Link} to='/signup'>Signup</Button>
+          {!currentUser ? <Button color='inherit' component={Link} to='/signup'>Signup</Button> : ' '}
         </Stack>
       </Toolbar>
     </AppBar>

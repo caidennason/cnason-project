@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,6 +11,7 @@ import { Box, TextField, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { postReview } from '../Establishments/establishmentsSlice';
 import ReviewCard from './ReviewCard';
+import { getCurrentUser } from '../Users/userSlice';
 
 function Reviews({establishments, name}){
 
@@ -21,7 +22,7 @@ function Reviews({establishments, name}){
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.users.currentUser)
-    console.log(currentUser, ' current user from the review component ')
+    // console.log(currentUser, ' current user from the review component ')
 
     const ExpandMore = styled((props) => {
         const { expand, ...other } = props;

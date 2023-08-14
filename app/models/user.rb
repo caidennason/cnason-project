@@ -6,7 +6,8 @@ class User < ApplicationRecord
     validates :password_confirmation, presence: true 
     has_many :establishments
     has_many :reviews 
-    has_many :comments
+    has_many :comments, through: :reviews 
+    # added this ^^ a little later so if it breaks it take it out lol
     has_many :dogs 
     has_secure_password
 end

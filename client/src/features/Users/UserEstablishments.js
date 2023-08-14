@@ -4,7 +4,7 @@ import { Box, List, ListItem, ListItemIcon, ListItemText, Typography} from '@mui
 
 function UserEstablishments({e}){
 
-    // console.log(e)
+    console.log(e)
 
     return(
         <>
