@@ -9,7 +9,11 @@ class CommentController < ApplicationController
 
     def create 
         comment = Comment.create(comment_params)
-        render json: comment
+        if comment.valid? 
+            render json: comment, status: :created
+        else
+            render json: {Error: "Make suer there's a comment!"}, status: :unprocessable_entity
+        end
     end
 
     private 
