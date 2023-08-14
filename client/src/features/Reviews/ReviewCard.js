@@ -4,6 +4,7 @@ import CommentForm from '../Comments/CommentForm';
 import CommentCard from '../Comments/CommentCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { getComments } from '../Comments/commentsSlice';
+import CommentDialog from '../Comments/CommentDialog';
 
 function ReviewCard({reviews, establishments, user}){
 
@@ -32,7 +33,7 @@ function ReviewCard({reviews, establishments, user}){
             .filter((c) => c.review_id === reviews.id)
             .map((c) => {
                 const user = c.user 
-                return <CommentCard key={c.id} c={c} user={user}/>
+                return <CommentDialog key={c.id} c={c} user={user}/>
             })}
             {/* check this in the am if there's anything weird happening. made the .filter change */}
             <CommentForm reviews={reviews}/>

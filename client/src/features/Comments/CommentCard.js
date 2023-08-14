@@ -7,7 +7,7 @@ function CommentCard({c, user}){
 
     return(
         <div>
-            <CommentDialog c={c} user={user}/>
+            {/* <CommentDialog c={c} user={user}/> */}
         </div>
     )
 

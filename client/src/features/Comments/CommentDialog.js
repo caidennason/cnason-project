@@ -19,22 +19,31 @@ function CommentDialog({c, user}){
     const handleClose = () => {
       setOpen(false);
     };
+
+    const contentPreview = c.content.slice(0, 9)
   
     return (
       <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          View Comments
+        <Button 
+        variant="outlined" 
+        onClick={handleClickOpen}
+        maxWidth="md"
+        style={{minWidth: "120px"}}
+        >
+          {contentPreview}..
         </Button>
         <Dialog
           open={open}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+        //   maxWidth="md"
+        //   minWidth="300px"
         >
           <DialogTitle id="alert-dialog-title">
             {"Comments"}
           </DialogTitle>
-          <DialogContent>
+          <DialogContent >
             <DialogContentText id="alert-dialog-description">
               {c.content}
             </DialogContentText>
