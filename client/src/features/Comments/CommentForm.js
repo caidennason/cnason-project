@@ -6,29 +6,39 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { UseSelector, UseDispatch } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux';
 import { getCurrentUser } from '../Users/userSlice';
+import { postComment } from './commentsSlice';
 
-function CommentForm(){
-    const [open, setOpen] = useState(false);
+function CommentForm({reviews}){
+
+    const dispatch = useDispatch()
+
+    console.log(reviews)
+
     const [content, setContent] = useState(' ');
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
+    const currentUser = useSelector((state) => state.users.currentUser)
+    console.log(currentUser)
+
 
     const handleContentChange = (e) => {
         setContent(e.target.value)
     }
 
+    const commentObject = {
+        content: content, 
+        user_id: currentUser.id,
+        review_id: reviews.id
+    }
+
     const handleCommentSubmit = (e) => {
         e.preventDefault()
-        console.log(' clicking the comment button ')
-        console.log(content)
+        // console.log(' clicking the comment button ')
+        // console.log(content)
+        console.log(commentObject)
+        dispatch(postComment(commentObject))
     }
   
     return (

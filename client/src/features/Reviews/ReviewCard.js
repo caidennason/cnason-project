@@ -28,10 +28,14 @@ function ReviewCard({reviews, establishments, user}){
                     {user ? `Posted by ${user.name}` : ' '}
                 </Typography>
             </CardContent>
-            {comments.map((c) => {
-                return <CommentCard c={c}/>
+            {comments
+            .filter((c) => c.review_id === reviews.id)
+            .map((c) => {
+                const user = c.user 
+                return <CommentCard key={c.id} c={c} user={user}/>
             })}
-            <CommentForm />
+            {/* check this in the am if there's anything weird happening. made the .filter change */}
+            <CommentForm reviews={reviews}/>
         </Card>
     )
 }

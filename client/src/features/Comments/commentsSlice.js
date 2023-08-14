@@ -37,6 +37,7 @@ const commentsSlice = createSlice({
         },
         [postComment.fulfilled](state, action){
             console.log(action.payload)
+            state.entities.push(action.payload)
         },
     }
 })

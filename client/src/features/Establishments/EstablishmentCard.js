@@ -16,19 +16,6 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
 
     const dispatch = useDispatch()
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    const handleNextPage = () => {
-        setCurrentPage(currentPage + 1)
-    };
-
-    const handlePreviousPage = () => {
-        setCurrentPage(currentPage - 1)
-    };
-
     const [selectedItem, setSelectedItem] = useState(null);
     const [updatedDescription, setUpdatedDescription] = useState(bio);
     const [updatedName, setUpdatedName] = useState(name);

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   post '/establishments', to: "establishment#create"
   post '/reviews', to: "review#create"
+  post '/comments', to: "comment#create"
 
   patch '/establishments/:id', to: "establishment#update"
 
