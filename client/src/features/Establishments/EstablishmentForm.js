@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import EditEstablishment from './EditEstablishment';
 import { TextField, Box, Button } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';

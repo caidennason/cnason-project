@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import EditEstablishment from "./EditEstablishment";
 import { styled } from "@mui/material/styles";
 import { Grid, Item, Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button, Select, InputLabel, TextField, FormControlLabel, NativeSelect, MenuItem, FormControl, Checkbox } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import establishmentsSlice, { deleteEstablishment, updateEstablishment } from './establishmentsSlice';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import PetsIcon from '@mui/icons-material/Pets';
 import SickIcon from '@mui/icons-material/Sick';
 import Reviews from "../Reviews/Reviews";
+import ErrorDialog from "./ErrorDialog";
 
 
 function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs, id}}){
@@ -23,6 +23,8 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     const [updatedType, setUpdatedType] = useState(establishment_type);
     const [updatedLocation, setUpdatedLocation] = useState(location);
     const [updatedAllowsDogs, setUpdatedAllowsDogs] = useState(allows_dogs);
+    const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false)
+    const [errorDialogMessage, setErrorDialogMessage] = useState('')
 
     const handleNoImage = (e) => {
         e.target.onerror = null 
@@ -30,6 +32,9 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     };
 
     const editid = e.id;
+
+    const errorMessage = useSelector((state) => state.establishments.error)
+    console.log(errorMessage)
 
     const updatedEstablishmentObject = {
         id: editid,
@@ -89,18 +94,27 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         setUpdatedLocation(e.target.value)
     };
 
-    console.log(e.reviews)
-
 
     return (
         <div>
             <br></br>
         <Card sx={{ maxWidth: 345, bgcolor: "peachpuff" }}>
+            <ErrorDialog 
+                isErrorDialogOpen={isErrorDialogOpen}
+                onClose={() => setIsErrorDialogOpen(false)}
+                errorDialogMessage={errorDialogMessage}
+            />
             <CardHeader 
                 title={name}
                 subheader={`Located in ${location}`}
                 action={<IconButton onClick={() => {
                     dispatch(deleteEstablishment(e))
+                    .unwrap()
+                    .catch(error => {
+                        console.error("Error deleting establishment from the card", error)
+                        setErrorDialogMessage("Error deleting establishment: " + 'You can only delete an establishment you created.'); // Set the error message
+                        setIsErrorDialogOpen(true);
+                    });
                     }}>
                             <ClearIcon />
                         </IconButton>}
@@ -125,7 +139,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                         </>
                     ) : (
                         <>
-                        They don't allow dogs! These people are sickos!{sickoIcon()}
+                        They don't allow dogs!{sickoIcon()}
                         </>
                     )}
                 </Typography>

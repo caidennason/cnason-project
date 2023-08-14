@@ -103,6 +103,8 @@ const establishmentsSlice = createSlice({
         },
         [deleteEstablishment.rejected](state, action) { 
             console.log( ' unable to delete ', action.error.message)
+            state.error = action.error.message
+            console.log(state.error, ' checking if state.error works')
         },
         [deleteEstablishment.pending](state, action) {
             console.log(' pending ');

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { signup } from './userSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 function Signup(){
@@ -14,6 +15,7 @@ function Signup(){
     const [photoUrl, setPhotoUrl] = useState('Photo Url (Optional)')
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleUsername = (e) => {
         setUsername(e.target.value)
@@ -51,6 +53,7 @@ function Signup(){
             photo: photoUrl
         }
         dispatch(signup(user))
+        navigate('/profile')
     }
 
     return(

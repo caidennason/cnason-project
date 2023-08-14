@@ -10,8 +10,6 @@ function User(){
 
     const currentUser = useSelector((state) => state.users.currentUser);
 
-    console.log(currentUser);
-
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -19,15 +17,24 @@ function User(){
         
     }, [dispatch])
 
+    console.log(currentUser)
+
+
+
     return(
         <div>
             {currentUser ? `Welcome, ${currentUser.name}!` : ' '}
             <br></br>
-            Your Reviews
+            {/* About me: {currentUser.bio} */}
+            About me: { currentUser ? currentUser.bio : ' '}
+            <p>Your Reviews:</p>
+            <p></p>
             {currentUser && currentUser.reviews.map((r) => {
                 return <UserReviews r={r} />
             })}
-            Your Establishments
+            {/* {currentUser.establishments.length === 0 ? ' ' : 'Your Establishments'} */}
+            <p>Your Establishments:</p>
+            <p> </p>
             {currentUser && currentUser.establishments.map((e) => {
                 return <UserEstablishments e={e} />
             })}
