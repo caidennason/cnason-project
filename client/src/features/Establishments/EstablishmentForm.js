@@ -79,11 +79,6 @@ function EstablishmentForm(){
                 console.log('all good')
             }
         })
-        // .catch(error => {
-        //     console.error('submission failed', error)
-        // })
-            // .then((res) => res)
-            // .then((data) => data)
             reset()
     }
 

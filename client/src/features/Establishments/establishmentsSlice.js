@@ -79,8 +79,6 @@ export const postReview = createAsyncThunk("reviews/postReview", (review) => {
         return res.json()
     })
     .then((data) => data)
-    // .then((res) => res.json())
-    // .then((data) => data)
 })
 
 
@@ -103,7 +101,6 @@ const establishmentsSlice = createSlice({
         [fetchEstablishments.fulfilled](state, action) {
             state.entities = action.payload;
             state.status = "loaded";
-            console.log(state.entities)
         },
         [fetchEstablishments.pending](state, action){
             state.status = "loading...";

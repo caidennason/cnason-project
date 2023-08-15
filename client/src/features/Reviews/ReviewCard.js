@@ -10,10 +10,19 @@ function ReviewCard({reviews, establishments, user}){
 
     const comments = useSelector((state) => state.comments.entities)
     const dispatch = useDispatch()
+    const users = useSelector((state) => state.users.entities)
+
+    const currentUser = useSelector((state) => state.users.currentUser)
+    console.log(currentUser)
 
     useEffect(() => {
         dispatch(getComments())
     }, [dispatch])
+
+    
+    console.log(reviews.user.name)
+    console.log(user)
+    console.log(users)
 
     return(
         <Card>
@@ -22,7 +31,7 @@ function ReviewCard({reviews, establishments, user}){
                     {reviews.content}
                 </Typography>
                 <Typography sx={{mb: 1.5, fontSize: 10}}>
-                    {user ? `Posted by ${user.name}` : ' '}
+                    {user ? `Posted by ${reviews.user.name}` : ' '}
                 </Typography>
             </CardContent>
             {comments

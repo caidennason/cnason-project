@@ -62,7 +62,7 @@ const usersSlice = createSlice({
     name: "users", 
     initialState:{
         entities: [],
-        currentUser: false,
+        currentUser: null,
         status: "idle",
     } ,
     reducers: {
@@ -71,6 +71,7 @@ const usersSlice = createSlice({
     extraReducers: {
         [getUsers.fulfilled](state, action) {
             console.log(action.payload)
+            state.entities = action.payload
         },
         [userLogin.fulfilled](state, action) {
             console.log(action.payload)
