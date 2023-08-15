@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEstablishments } from './establishmentsSlice'
 import { Grid } from '@mui/material';
 import SearchBar from './SearchBar';
+import { getCurrentUser, getUsers } from '../Users/userSlice';
 
 function Establishments() {
     const establishments = useSelector((state) => state.establishments.entities);
@@ -20,6 +21,10 @@ function Establishments() {
     useEffect(() => {
       setFilteredEstablishments(establishments)
     }, [establishments])
+
+    useEffect(() => {
+      dispatch(getUsers())
+    }, [getUsers])
 
     console.log(establishments)
     console.log(users)

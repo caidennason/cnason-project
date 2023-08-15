@@ -33,8 +33,16 @@ export const getUsers = createAsyncThunk("users/getUsers", (user) => {
 
 export const getCurrentUser = createAsyncThunk("users/getCurrentUser", (user) => {
     return fetch(`${baseUrl}/me`)
-    .then((res) => res.json())
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error("You aren't logged in")
+        } 
+        return res.json()
+    })
     .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
+
 })
 
 export const signup = createAsyncThunk("users/signup", (user) => {
