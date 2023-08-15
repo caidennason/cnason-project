@@ -14,7 +14,7 @@ import EstablishmentErrorDialog from "./EstablishmentErrorDialog";
 import { getCurrentUser } from "../Users/userSlice";
 
 
-function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs, id}}){
+function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs}}){
 
     const dispatch = useDispatch()
 
@@ -177,7 +177,8 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 </Typography>
             </CardContent>
             
-                { currentUser.id === e.user?.id ? <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}>
+                {/* { currentUser.id === e.user.id ? <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}> */}
+            <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}>
                     <FormControl variant="outlined" sx={{boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}>
                         <Select
                             IconComponent={EditIcon}
@@ -193,7 +194,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                         </Select>
                     </FormControl>
                     <Button type="submit" color='inherit' sx={{marginTop: '10px'}} variant='outlined'>Edit</Button>
-                </form> : ' '}
+                </form>
 
                 {selectedItem === 'description' && (
                     <TextField label="Description" value={updatedDescription} onChange={handleDescriptionChange}/>

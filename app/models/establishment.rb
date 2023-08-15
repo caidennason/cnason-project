@@ -5,8 +5,8 @@ class Establishment < ApplicationRecord
     validates :bio, presence: true 
     validates :allows_dogs, inclusion: [true, false]
     belongs_to :user, optional: true
-    has_many :reviews
-    has_many :comments, through: :reviews
+    has_many :reviews, dependent: :destroy
+    has_many :comments, through: :reviews, dependent: :destroy 
 end
 
 # works when allows_dogs is commented out 

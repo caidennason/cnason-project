@@ -19,10 +19,9 @@ function ReviewCard({reviews, establishments, user}){
         dispatch(getComments())
     }, [dispatch])
 
-    
-    console.log(reviews.user.name)
     console.log(user)
     console.log(users)
+    console.log(reviews.reviewer_name)
 
     return(
         <Card>
@@ -31,7 +30,7 @@ function ReviewCard({reviews, establishments, user}){
                     {reviews.content}
                 </Typography>
                 <Typography sx={{mb: 1.5, fontSize: 10}}>
-                    {user ? `Posted by ${reviews.user.name}` : ' '}
+                    {reviews.reviewer_name ? `Posted by ${reviews.reviewer_name}` : "Hmm...we aren't sure who left this one"}
                 </Typography>
             </CardContent>
             {comments
