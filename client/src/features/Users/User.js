@@ -23,22 +23,19 @@ function User(){
 
     return(
         <div>
-            {currentUser ? <h2>Welcome, ${currentUser.name}!</h2> : ' '}
-            <br></br>
-            {/* About me: {currentUser.bio} */}
-            About me: { currentUser ? currentUser.bio : ' '}
-            <p>Your Reviews:</p>
+            {currentUser ? <h2>Welcome, {currentUser.name}!</h2> : null}
+            <br />
+            About me: {currentUser ? currentUser.bio : ''}
+                <p>Your Reviews:</p>
             <p></p>
-            {currentUser && currentUser.reviews.map((r) => {
-                return <UserReviews r={r} />
-            })}
-            {/* {currentUser.establishments.length === 0 ? ' ' : 'Your Establishments'} */}
+            {currentUser && currentUser.reviews ? (
+                currentUser.reviews.map((r) => <UserReviews r={r} />)
+            ) : null}
             <p>Your Establishments:</p>
             <p> </p>
-            {currentUser && currentUser.establishments.map((e) => {
-                return <UserEstablishments e={e} />
-            })}
-            
+            {currentUser && currentUser.establishments ? (
+                currentUser.establishments.map((e) => <UserEstablishments e={e} />)
+            ) : null}
         </div>
     )
 }

@@ -17,8 +17,15 @@ export const postComment = createAsyncThunk("comments/postComment", (comment) =>
         }, 
         body: JSON.stringify(comment)
     })
-    .then((res) => res.json())
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error('Unable to post comment. Make sure you filled it out!')
+        }
+        return res.json()
+    })
     .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 const commentsSlice = createSlice({
@@ -39,6 +46,9 @@ const commentsSlice = createSlice({
             console.log(action.payload)
             state.entities.push(action.payload)
         },
+        [postComment.rejected](state, action){
+            console.log(action.paylaod)
+        }
     }
 })
 

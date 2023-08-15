@@ -12,7 +12,7 @@ class CommentController < ApplicationController
         if comment.valid? 
             render json: comment, status: :created
         else
-            render json: {Error: "Make suer there's a comment!"}, status: :unprocessable_entity
+            render json: {Error: "Make sure there's a comment!"}, status: :unprocessable_entity
         end
     end
 

@@ -1,26 +1,24 @@
 import React, {useState, useEffect} from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from '../Users/userSlice';
 import { postComment } from './commentsSlice';
+import CommentErrorDialog from './CommentErrorDialog';
+
 
 function CommentForm({reviews}){
 
     const dispatch = useDispatch()
 
-    console.log(reviews)
-
     const [content, setContent] = useState(' ');
 
     const currentUser = useSelector((state) => state.users.currentUser)
     console.log(currentUser)
+
+    const [isDialogOpen, setDialog] = useState(false)
+    const [error, setError] = useState('')
 
 
     const handleContentChange = (e) => {
@@ -35,14 +33,24 @@ function CommentForm({reviews}){
 
     const handleCommentSubmit = (e) => {
         e.preventDefault()
-        // console.log(' clicking the comment button ')
-        // console.log(content)
-        console.log(commentObject)
         dispatch(postComment(commentObject))
+        .then((data) => {
+            if (data.error) {
+                setDialog(true)
+                setError(data.error.message)
+            } else {
+                console.log( ' all good ')
+            }
+        })
     }
   
     return (
       <form onSubmit={handleCommentSubmit}>
+        <CommentErrorDialog
+        isDialogOpen={isDialogOpen}
+        onClose={() => setDialog(false)}
+        error={error}
+        />
         <TextField
               autoFocus
               multiline 

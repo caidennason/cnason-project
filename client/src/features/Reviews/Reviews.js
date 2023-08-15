@@ -12,12 +12,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postReview } from '../Establishments/establishmentsSlice';
 import ReviewCard from './ReviewCard';
 import { getCurrentUser } from '../Users/userSlice';
+import ReviewDialog from './ReviewDialog';
 
 function Reviews({establishments, name}){
 
     // console.log(establishments)
 
     const [reviewContent, setReviewContent] = useState('')
+    const [error, setError] = useState('')
+    const [isDialogOpen, setDialog] = useState(false)
 
     const dispatch = useDispatch();
 
@@ -54,11 +57,25 @@ function Reviews({establishments, name}){
             user_id: currentUser.id
         }
         dispatch(postReview(reviewObject))
-        setReviewContent('')
+        .then((data) => {
+            if (data.error) {
+                console.error('Error', data.error.message)
+                setDialog(true)
+                setError(data.error.message)
+            } else {
+                console.log(' all good ')
+            }
+        })
     }
 
     return (
 <div>
+    <ReviewDialog 
+    isDialogOpen={isDialogOpen}
+    onClose={() => setDialog(false)}
+    error={error}
+    />
+
     <Card sx={{ maxWidth: 345 }}>
         <CardActions disableSpacing>
             <Typography aria-label="add to favorites">

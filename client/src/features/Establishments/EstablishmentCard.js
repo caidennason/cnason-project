@@ -16,6 +16,8 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
 
     const dispatch = useDispatch()
 
+    console.log(e)
+
     const [selectedItem, setSelectedItem] = useState(null);
     const [updatedDescription, setUpdatedDescription] = useState(bio);
     const [updatedName, setUpdatedName] = useState(name);
@@ -59,38 +61,31 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     };
 
     const handleAllowsDogsChange = (e) => {
-        console.log(e.target.value)
         setUpdatedAllowsDogs(!updatedAllowsDogs)
     };
 
     const submitEdit = (e, updatedEstablishmentObject) => {
         e.preventDefault()
         dispatch(updateEstablishment(updatedEstablishmentObject))
-        console.log(updatedEstablishmentObject)
     };
 
     const handleDescriptionChange = (e) => {
-        console.log(e.target.value)
         setUpdatedDescription(e.target.value)
     };
 
     const handleNameChange = (e) => {
-        console.log(e.target.value)
         setUpdatedName(e.target.value)
     };
 
     const handlePhotoUrlChange = (e) => {
-        console.log(e.target.value)
         setUpdatedPhotoUrl(e.target.value)
     };
 
     const handleTypeChange = (e) => {
-        console.log(e.target.value)
         setUpdatedType(e.target.value)
     };
 
     const handleLocationChange = (e) => {
-        console.log(e.target.value)
         setUpdatedLocation(e.target.value)
     };
 

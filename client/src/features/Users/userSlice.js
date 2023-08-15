@@ -15,10 +15,10 @@ export const userLogin = createAsyncThunk("users/userLogin", (user) => {
     })
     .then((res) => {
         if (!res.ok) {
-            throw new Error("unable to login")
+            throw new Error('Unable to login. Make sure your username and password are correct, or sign up for an account!')
             console.log(res)
         }
-        return res.json
+        return res.json()
     })
     .then((data) => data)
     // .then((res) => res.json())

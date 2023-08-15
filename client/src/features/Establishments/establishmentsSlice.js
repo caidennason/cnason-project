@@ -1,3 +1,5 @@
+// this one handles reviews
+
 import {createAsyncThunk, createSlice, current} from "@reduxjs/toolkit"
 
 export const fetchEstablishments = createAsyncThunk("establishments/fetchEstablishments", () => {
@@ -15,8 +17,15 @@ export const postEstablishment = createAsyncThunk("establishments/postEstablishm
         },
         body: JSON.stringify(establishment)
     })
-    .then((res) => res.json())
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error('Unable to post establishment. Make sure all required fields are filled out!')
+        }
+        return res.json()
+    })
     .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 export const deleteEstablishment = createAsyncThunk("establishments/deleteEstablishment", (establishment) => {
@@ -47,7 +56,7 @@ export const updateEstablishment = createAsyncThunk("establishments/updateEstabl
         .then((data) => data)
 })
 
-export const postReview = createAsyncThunk("reveiws/postReview", (review) => {
+export const postReview = createAsyncThunk("reviews/postReview", (review) => {
     return fetch("http://localhost:4000/reviews", {
         method: 'POST',
         headers: {
@@ -56,8 +65,15 @@ export const postReview = createAsyncThunk("reveiws/postReview", (review) => {
         },
         body: JSON.stringify(review)
     })
-    .then((res) => res.json())
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error('Unable to post review. Make sure you filled it out!')
+        }
+        return res.json()
+    })
     .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 
@@ -89,7 +105,7 @@ const establishmentsSlice = createSlice({
             state.status = "post request loading";
         },
         [postEstablishment.rejected](state, action){
-            state.status = "post request failed";
+            console.log(action.payload)
         },
         [postEstablishment.fulfilled](state, action) {
             state.entities.push(action.payload);

@@ -1,11 +1,12 @@
 import React from 'react'
 import {Dialog, Button, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
-function LoginErrorDialog({onClose, isLoginErrorDialogOpen, error}){
+
+function EstablishmentErrorDialog({error, onClose, isDialogOpen}){
 
     return(
         <>
-        <Dialog open={isLoginErrorDialogOpen} onClose={onClose}>
+        <Dialog open={isDialogOpen} onClose={onClose}>
             <DialogTitle>Error</DialogTitle>
                 <DialogContent>
                     <DialogContentText>{error}</DialogContentText>
@@ -18,4 +19,4 @@ function LoginErrorDialog({onClose, isLoginErrorDialogOpen, error}){
     )
 }
 
-export default LoginErrorDialog
+export default EstablishmentErrorDialog

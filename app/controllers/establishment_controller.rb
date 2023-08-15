@@ -9,7 +9,11 @@ class EstablishmentController < ApplicationController
 
     def create
         establishment = Establishment.create(est_params)
-        render json: establishment
+        if establishment.valid?
+            render json: establishment, status: :created
+        else
+            render json: {error: "Make sure name, type, location and description are completed!"}, status: :unprocessable_entity
+        end
     end
 
     def delete

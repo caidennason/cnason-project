@@ -8,11 +8,7 @@ import CommentDialog from '../Comments/CommentDialog';
 
 function ReviewCard({reviews, establishments, user}){
 
-    console.log(reviews)
-    console.log(user)
-
     const comments = useSelector((state) => state.comments.entities)
-    console.log(comments)
     const dispatch = useDispatch()
 
     useEffect(() => {

@@ -15,8 +15,15 @@ export const postReview = createAsyncThunk("reviews/postReview", (review) => {
         },
         body: JSON.stringify(review)
     })
-    .then((res) => res.json())
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error('Unable to post review. Make sure you filled it out!')
+        }
+        return res.json()
+    })
     .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 const reviewsSlice = createSlice({
@@ -45,7 +52,10 @@ const reviewsSlice = createSlice({
             console.log(action.payload, ' from the slice ')
             console.log(current(state.entities))
             state.entities.push(action.payload)
-        }
+        },
+        [postReview.rejected](state, action) {
+            console.log(action.payload)
+        },
     }
 })
 
