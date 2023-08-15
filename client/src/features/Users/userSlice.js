@@ -13,8 +13,16 @@ export const userLogin = createAsyncThunk("users/userLogin", (user) => {
         },
         body: JSON.stringify(user)
     })
-    .then((res) => res.json())
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error("unable to login")
+            console.log(res)
+        }
+        return res.json
+    })
     .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 export const getUsers = createAsyncThunk("users/getUsers", (user) => {
@@ -72,6 +80,9 @@ const usersSlice = createSlice({
                 currentUser: action.payload
             }
         },
+        [userLogin.rejected](state, action) {
+            console.log(action.payload)
+        },
         [signup.fulfilled](state, action) {
             console.log(action.payload)
             state.entities.push(action.payload)
@@ -80,10 +91,6 @@ const usersSlice = createSlice({
         [getCurrentUser.fulfilled](state, action) {
             console.log(action.payload)
             state.currentUser = action.payload
-            // return {
-            //     ...state, 
-            //     currentUser: action.payload
-            // }
             console.log(state.currentUser)
         },
         [getCurrentUser.pending](state, action) { 

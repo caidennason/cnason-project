@@ -6,14 +6,10 @@ function SearchBar({establishments, onSearch}){
 
     const [search, setSearch] = useState('')
 
-    // const listedEstablishments = establishments.filter((est) => est.)
-    console.log(establishments.filter((est) => est.name.toLowerCase().includes(search.toLowerCase())))
-
     const handleSearchBar = (e) => {
+    setSearch(e.target.value)
     const filteredEstablishments = establishments.filter((est) => est.name.toLowerCase().includes(search.toLowerCase()))
     onSearch(filteredEstablishments)
-    setSearch(e.target.value)
-    console.log(search)
     }
 
     return(

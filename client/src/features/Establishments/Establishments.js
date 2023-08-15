@@ -10,23 +10,15 @@ function Establishments() {
     const establishments = useSelector((state) => state.establishments.entities);
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.users.currentUser)
-    console.log(currentUser, 'hello ')
     const [filteredEstablishments, setFilteredEstablishments] = useState(establishments)
 
-    // // const listedEstablishments = establishments.filter((est) => est.)
-
-    // console.log(establishments.filter((est) => est.name == search))
-
-    // const handleSearchBar = (e) => {
-    //   setSearch(e.target.value)
-    //   console.log(search)
-    // }
-
-    
-  
     useEffect(() => {
       dispatch(fetchEstablishments());
     }, [dispatch]);
+
+    useEffect(() => {
+      setFilteredEstablishments(establishments)
+    }, [establishments])
   
     return (
       <div>

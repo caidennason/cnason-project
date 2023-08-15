@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -10,7 +10,7 @@ import { useSelector, UseDispatch } from 'react-redux/es/hooks/useSelector';
 
 function CommentDialog({c, user}){
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
       setOpen(true);

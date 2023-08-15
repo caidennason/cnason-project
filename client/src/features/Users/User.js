@@ -23,7 +23,7 @@ function User(){
 
     return(
         <div>
-            {currentUser ? <h2>Welcome, {currentUser.name}!</h2> : ' '}
+            {currentUser ? <h2>Welcome, ${currentUser.name}!</h2> : ' '}
             <br></br>
             {/* About me: {currentUser.bio} */}
             About me: { currentUser ? currentUser.bio : ' '}

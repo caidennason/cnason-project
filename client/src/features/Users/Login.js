@@ -3,6 +3,7 @@ import { Button, TextField, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from './userSlice';
+import LoginErrorDialog from './LoginErrorDialog';
 import { fetchEstablishments } from '../Establishments/establishmentsSlice';
 import { getUsers, getCurrentUser } from './userSlice';
 
@@ -12,6 +13,8 @@ function Login(){
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [isLoginErrorDialogOpen, setLoginErrorDialog] = useState(false)
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value)
@@ -28,11 +31,29 @@ function Login(){
             password: password
         }
         dispatch(userLogin(user))
-        navigate('/profile')
+        .then((data) => {
+            if (data.error) {
+                console.error('Login failed', data.error.message)
+                setLoginErrorDialog(true)
+                setError(data.error.message)
+            } else {
+                console.log('logged in')
+                navigate('/')
+            }
+        })
+        .catch(error => {
+            console.error('Login failed', error)
+        })
+
     }
 
     return(
         <div>
+            <LoginErrorDialog 
+            isLoginErrorDialogOpen={isLoginErrorDialogOpen}
+            onClose={() => setLoginErrorDialog(false)}
+            error={error}
+            />
             <br></br>
             <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Log In</h2>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
