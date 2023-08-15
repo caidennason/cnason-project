@@ -11,6 +11,7 @@ function Establishments() {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.users.currentUser)
     const [filteredEstablishments, setFilteredEstablishments] = useState(establishments)
+    const users = useSelector((state) => state)
 
     useEffect(() => {
       dispatch(fetchEstablishments());
@@ -19,6 +20,9 @@ function Establishments() {
     useEffect(() => {
       setFilteredEstablishments(establishments)
     }, [establishments])
+
+    console.log(establishments)
+    console.log(users)
   
     return (
       <div>

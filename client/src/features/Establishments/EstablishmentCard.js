@@ -4,7 +4,7 @@ import { Grid, Item, Card, CardHeader, CardMedia, CardContent, Typography, IconB
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from "react-redux";
-import establishmentsSlice, { deleteEstablishment, updateEstablishment } from './establishmentsSlice';
+import { deleteEstablishment, updateEstablishment } from './establishmentsSlice';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import PetsIcon from '@mui/icons-material/Pets';
 import SickIcon from '@mui/icons-material/Sick';
@@ -76,15 +76,20 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     };
 
     const handleAllowsDogsChange = (e) => {
-        setUpdatedAllowsDogs(!updatedAllowsDogs)
+        const newAllowsDogs = !updatedAllowsDogs
+        console.log(newAllowsDogs)
+        setUpdatedAllowsDogs(newAllowsDogs)
     };
 
+    console.log(updatedEstablishmentObject)
+
     const resetEditForm = () => {
-        setUpdatedDescription('')
-        setUpdatedLocation('')
-        setUpdatedName('')
-        setUpdatedPhotoUrl('')
-        setUpdatedType('')
+        setUpdatedDescription(bio)
+        setUpdatedLocation(location)
+        setUpdatedName(name)
+        setUpdatedPhotoUrl(photo)
+        setUpdatedType(establishment_type)
+        setUpdatedAllowsDogs(allows_dogs)
     }
 
     const submitEdit = (e, updatedEstablishmentObject) => {

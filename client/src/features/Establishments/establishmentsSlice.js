@@ -39,8 +39,6 @@ export const deleteEstablishment = createAsyncThunk("establishments/deleteEstabl
             return res.json()
         })
         .then((data) => data)
-        // .then((res) => res.json())
-        // .then((data) => data)
     })
 
 export const updateEstablishment = createAsyncThunk("establishments/updateEstablishment", (establishment) => {
@@ -59,8 +57,6 @@ export const updateEstablishment = createAsyncThunk("establishments/updateEstabl
             return res.json()
         })
         .then((data) => data)
-        // .then((res) => res.json())
-        // .then((data) => data)
 })
 
 export const postReview = createAsyncThunk("reviews/postReview", (review) => {
