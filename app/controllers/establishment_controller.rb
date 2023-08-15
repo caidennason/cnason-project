@@ -34,7 +34,7 @@ class EstablishmentController < ApplicationController
     def update
         establishment = Establishment.find_by(id: params[:id])
         establishment.update(est_params)
-        if establishment.valid? 
+        if establishment.valid? && establishment.user_id == current_user.id
             render json: establishment
         else 
             render json: {error: "ERROR: Make sure everything is filled out!"}, status: :unprocessable_entity

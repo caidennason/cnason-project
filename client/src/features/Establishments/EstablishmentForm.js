@@ -54,6 +54,7 @@ function EstablishmentForm(){
         setEstablishmentLocation('')
         setEstablishmentType('')
         setEstablishmentPhotoUrl('')
+        setEstablishmentDescription('')
         setAllowsDogs(true)
     }
 
@@ -83,6 +84,7 @@ function EstablishmentForm(){
         // })
             // .then((res) => res)
             // .then((data) => data)
+            reset()
     }
 
     return(
@@ -95,14 +97,14 @@ function EstablishmentForm(){
 
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <TextField id="outlined-basic" onChange={handleEstablishmentNameChange} label='Establishment Name' variant="outlined" value={establishmentName}/>
-                <TextField id="outlined-basic" onChange={handleEstablishmentLocationChange} label='Location' variant="outlined" />
+                <TextField id="outlined-basic" onChange={handleEstablishmentLocationChange} label='Location' variant="outlined" value={establishmentLocation}/>
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField id="outlined-basic" onChange={handleEstablishmentTypeChange} label='Type (Restaurant, Bar, etc)' variant="outlined" />
-                <TextField id="outlined-basic" onChange={handleEstablishmentDescriptionChange} label='Description of the Establishment' variant="outlined" />
+                <TextField id="outlined-basic" onChange={handleEstablishmentTypeChange} label='Type (Restaurant, Bar, etc)' variant="outlined" value={establishmentType}/>
+                <TextField id="outlined-basic" onChange={handleEstablishmentDescriptionChange} label='Description of the Establishment' variant="outlined" value={establishmentDescription}/>
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField  id="outlined-basic" onChange={handleEstablishmentPhotoUrlChange} label='Photo Url (Optional)' variant="outlined" value={establishmentPhotoUrl}/>
+                <TextField  id="outlined-basic" onChange={handleEstablishmentPhotoUrlChange} label='Photo Url (Optional)' variant="outlined" value={establishmentPhotoUrl} />
             </Box>
             <FormGroup style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <FormControlLabel control={<Checkbox defaultChecked onClick={handleAllowsDogs}/>} label="Allows Dogs" />

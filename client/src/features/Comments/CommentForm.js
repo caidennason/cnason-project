@@ -42,6 +42,7 @@ function CommentForm({reviews}){
                 console.log( ' all good ')
             }
         })
+        setContent('')
     }
   
     return (
@@ -62,6 +63,7 @@ function CommentForm({reviews}){
               fullWidth
               variant="standard"
               onChange={handleContentChange}
+              value={content}
             />
             <Button type="submit" variant="outlined">
                 Comment

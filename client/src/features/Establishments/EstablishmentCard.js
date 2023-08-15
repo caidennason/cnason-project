@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { Grid, Item, Card, CardHeader, CardMedia, CardContent, Typography, IconButton, Button, Select, InputLabel, TextField, FormControlLabel, NativeSelect, MenuItem, FormControl, Checkbox } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
@@ -10,6 +10,8 @@ import PetsIcon from '@mui/icons-material/Pets';
 import SickIcon from '@mui/icons-material/Sick';
 import Reviews from "../Reviews/Reviews";
 import ErrorDialog from "./ErrorDialog";
+import EstablishmentErrorDialog from "./EstablishmentErrorDialog";
+import { getCurrentUser } from "../Users/userSlice";
 
 
 function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type, allows_dogs, id}}){
@@ -28,12 +30,25 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
     const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false)
     const [errorDialogMessage, setErrorDialogMessage] = useState('')
 
+    const [isDialogOpen, setDialog] = useState(false)
+    const [error, setError] = useState('')
+
     const handleNoImage = (e) => {
         e.target.onerror = null 
         e.target.src = "https://i.imgur.com/6Q01PXD.jpg"
     };
 
+    const currentUser = useSelector((state) => state.users.currentUser);
+
+    useEffect(() => {
+        dispatch(getCurrentUser())
+        
+    }, [dispatch])
+
+    console.log(currentUser)
+
     const editid = e.id;
+    console.log(e)
 
     const errorMessage = useSelector((state) => state.establishments.error)
     console.log(errorMessage)
@@ -64,9 +79,26 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         setUpdatedAllowsDogs(!updatedAllowsDogs)
     };
 
+    const resetEditForm = () => {
+        setUpdatedDescription('')
+        setUpdatedLocation('')
+        setUpdatedName('')
+        setUpdatedPhotoUrl('')
+        setUpdatedType('')
+    }
+
     const submitEdit = (e, updatedEstablishmentObject) => {
         e.preventDefault()
         dispatch(updateEstablishment(updatedEstablishmentObject))
+        .then((data) => {
+            if (data.error) {
+                setDialog(true)
+                setError(data.error.message)
+            } else {
+                console.log( ' all good ')
+            }
+        })
+        resetEditForm()
     };
 
     const handleDescriptionChange = (e) => {
@@ -94,6 +126,11 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         <div>
             <br></br>
         <Card sx={{ maxWidth: 345, bgcolor: "peachpuff" }}>
+            <EstablishmentErrorDialog 
+            isDialogOpen={isDialogOpen}
+            onClose={() => setDialog(false)}
+            error={error}
+            />
             <ErrorDialog 
                 isErrorDialogOpen={isErrorDialogOpen}
                 onClose={() => setIsErrorDialogOpen(false)}
@@ -140,7 +177,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 </Typography>
             </CardContent>
             
-                <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}>
+                { currentUser.id === e.user?.id ? <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}>
                     <FormControl variant="outlined" sx={{boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}>
                         <Select
                             IconComponent={EditIcon}
@@ -156,7 +193,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                         </Select>
                     </FormControl>
                     <Button type="submit" color='inherit' sx={{marginTop: '10px'}} variant='outlined'>Edit</Button>
-                </form>
+                </form> : ' '}
 
                 {selectedItem === 'description' && (
                     <TextField label="Description" value={updatedDescription} onChange={handleDescriptionChange}/>

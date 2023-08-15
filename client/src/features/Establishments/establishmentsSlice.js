@@ -52,8 +52,15 @@ export const updateEstablishment = createAsyncThunk("establishments/updateEstabl
         },
         body: JSON.stringify(establishment)
     })
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Make sure all fields are still filled out! (except photo url, that's ok)")
+            } 
+            return res.json()
+        })
         .then((data) => data)
+        // .then((res) => res.json())
+        // .then((data) => data)
 })
 
 export const postReview = createAsyncThunk("reviews/postReview", (review) => {
