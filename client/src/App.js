@@ -44,7 +44,6 @@ console.log(currentUser, ' checking the current user outside of the useEffect')
     navigate('/login')
   }
 
-
   return (
     <div className="App">
       {/* {number}
