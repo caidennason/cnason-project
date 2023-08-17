@@ -54,8 +54,15 @@ export const signup = createAsyncThunk("users/signup", (user) => {
         }, 
         body: JSON.stringify(user)
     })
-    .then((res) => res.json())
-    .then((data) => data)
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error('Make sure all required forms are filled out!')
+        }
+        return res.json()
+    })
+    .then((data)=> data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 export const signout = createAsyncThunk("users/signout", () => {

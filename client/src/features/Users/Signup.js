@@ -53,7 +53,17 @@ function Signup(){
             photo: photoUrl
         }
         dispatch(signup(user))
-        navigate('/profile')
+        .then((data) => {
+            if (data.error) {
+                alert('Make sure to fill out all the required forms!')
+            } else {
+                navigate('/profile')
+            }
+        })
+        .catch(error => {
+            console.error('Signup failed')
+        })
+        // navigate('/profile')
     }
 
     return(
