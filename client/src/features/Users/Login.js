@@ -60,7 +60,7 @@ function Login(){
                 <TextField required onChange={handleUsernameChange} id="outlined-basic" label="Username" variant="outlined" />
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField required onChange={handlePasswordChange} id="filled-basic" label="Password" variant="outlined" />
+                <TextField required onChange={handlePasswordChange} type="password" id="filled-basic" label="Password" variant="outlined" />
             </Box>
             <br></br>
             <Box variant='contained' style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>

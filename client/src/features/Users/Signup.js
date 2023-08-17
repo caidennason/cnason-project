@@ -73,13 +73,13 @@ function Signup(){
             <br></br>
             <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >Sign up for Dog Friendly!</h2>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
-            <TextField onChange={handleUsername}  id="outlined-basic" label='Username' variant="outlined" />
-            <TextField onChange={handlePassword} type={password} id="filled-basic" label='Password' variant="outlined" />
-            <TextField onChange={handlePasswordConfirmation}  type='Confirm Password' id="filled-basic" label={passwordConfirmation} variant="outlined" />
+            <TextField onChange={handleUsername}  required id="outlined-basic" label='Username' variant="outlined" />
+            <TextField onChange={handlePassword} required type="password" id="filled-basic" label='Password' variant="outlined" />
+            <TextField onChange={handlePasswordConfirmation}  required type='password' id="filled-basic" label={passwordConfirmation} variant="outlined" />
         </Box>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
-            <TextField onChange={handleLocation}  id="outlined-basic" label='City, State' variant="outlined"/>
-            <TextField onChange={handleBio}  id="outlined-multiline-flexible" multiline maxRows={5} label='Tell us About Yourself' variant="outlined"/>
+            <TextField onChange={handleLocation} required id="outlined-basic" label='City, State' variant="outlined"/>
+            <TextField onChange={handleBio}  required id="outlined-multiline-flexible" multiline maxRows={5} label='Tell us About Yourself' variant="outlined"/>
         </Box>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
             <TextField onChange={handlePhotoUrl} id="outlined-multiline-flexible" multiline maxRows={5} label='Photo Url (Optional)' variant="outlined"/>
