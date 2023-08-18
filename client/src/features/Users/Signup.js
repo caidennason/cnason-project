@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import { TextField, Box, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signup } from './userSlice';
 import { useNavigate } from 'react-router-dom';
 
 
 function Signup(){
+
+    const error = useSelector((state) => state.users.errors)
+    console.log(error)
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -55,7 +58,8 @@ function Signup(){
         dispatch(signup(user))
         .then((data) => {
             if (data.error) {
-                alert('Make sure to fill out all the required forms!')
+                console.log(data.error)
+                alert(data.error.message)
             } else {
                 navigate('/profile')
             }

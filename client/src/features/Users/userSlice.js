@@ -56,7 +56,12 @@ export const signup = createAsyncThunk("users/signup", (user) => {
     })
     .then((res) => {
         if (!res.ok) {
-            throw new Error('Make sure all required forms are filled out!')
+            return res.json()
+            .then((errorData) => {
+                throw new Error(errorData.error)
+            })
+            // throw new Error('Make sure all required forms are filled out!')
+            // console.log(res.errors)
         }
         return res.json()
     })
@@ -79,6 +84,7 @@ const usersSlice = createSlice({
         entities: [],
         currentUser: null,
         status: "idle",
+        errors: null
     } ,
     reducers: {
 
@@ -103,6 +109,11 @@ const usersSlice = createSlice({
             console.log(action.payload)
             state.entities.push(action.payload)
             state.currentUser = action.payload
+            state.errors = null
+        },
+        [signup.rejected](state, action){
+            console.log(action)
+            state.error = action.error.message
         },
         [getCurrentUser.fulfilled](state, action) {
             console.log(action.payload)

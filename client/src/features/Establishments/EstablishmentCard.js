@@ -158,7 +158,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
             />
             <CardContent>
                 <Typography>
-                   {bio}. Located in {location}. 
+                   {bio}
                 </Typography>
                 <CardMedia 
                     component="img"
@@ -183,6 +183,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
             </CardContent>
             
                 {/* { currentUser.id === e.user.id ? <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}> */}
+                {currentUser && currentUser.id === e.user.id &&
             <form onSubmit={(e => submitEdit(e, updatedEstablishmentObject))}>
                     <FormControl variant="outlined" sx={{boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}>
                         <Select
@@ -199,7 +200,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                         </Select>
                     </FormControl>
                     <Button type="submit" color='inherit' sx={{marginTop: '10px'}} variant='outlined'>Edit</Button>
-                </form>
+                </form>}
 
                 {selectedItem === 'description' && (
                     <TextField label="Description" value={updatedDescription} onChange={handleDescriptionChange}/>

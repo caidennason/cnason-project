@@ -6,11 +6,21 @@ function SearchBar({establishments, onSearch}){
 
     const [search, setSearch] = useState('')
 
+    // const handleSearchBar = (e) => {
+    // setSearch(e.target.value)
+    // const filteredEstablishments = establishments.filter((est) => est.name.toLowerCase().includes(search.toLowerCase()))
+    // onSearch(filteredEstablishments)
+    // }
+
     const handleSearchBar = (e) => {
-    setSearch(e.target.value)
-    const filteredEstablishments = establishments.filter((est) => est.name.toLowerCase().includes(search.toLowerCase()))
-    onSearch(filteredEstablishments)
-    }
+        const searchTerm = e.target.value;
+        setSearch(searchTerm);
+        const filteredEstablishments = establishments.filter((est) =>
+          est.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        onSearch(filteredEstablishments);
+      };
+      
 
     return(
     <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
