@@ -69,8 +69,8 @@ export const signout = createAsyncThunk("users/signout", () => {
     return fetch(`${baseUrl}/logout`, {
         method: "DELETE"
     })
-    .then((res) => res.json())
-    .then((data) => data)
+    // .then((res) => res.json())
+    // .then((data) => data)
 })
 
 const usersSlice = createSlice({

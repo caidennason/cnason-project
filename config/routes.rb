@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   delete '/establishments/:id', to: "establishment#delete"
 
   post '/signup', to: "user#create"
-  post '/login', to: "session#create"
-  delete '/logout', to: "session#destroy"
+  post '/login', to: "sessions#create"
+  delete '/logout', to: "sessions#destroy"
   get '/me', to: "user#show"
   
 

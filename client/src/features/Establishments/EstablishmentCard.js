@@ -103,7 +103,7 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
                 console.log( ' all good ')
             }
         })
-        resetEditForm()
+        // resetEditForm()
     };
 
     const handleDescriptionChange = (e) => {

@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 
 function Signup(){
 
-    const [username, setUsername] = useState('Username')
-    const [password, setPassword] = useState('Password')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('Confirm Password')
-    const [location, setLocation] = useState('City, State')
-    const [bio, setBio] = useState('Tell us About Yourself')
-    const [photoUrl, setPhotoUrl] = useState('Photo Url (Optional)')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [location, setLocation] = useState('')
+    const [bio, setBio] = useState('')
+    const [photoUrl, setPhotoUrl] = useState('')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -75,7 +75,7 @@ function Signup(){
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
             <TextField onChange={handleUsername}  required id="outlined-basic" label='Username' variant="outlined" />
             <TextField onChange={handlePassword} required type="password" id="filled-basic" label='Password' variant="outlined" />
-            <TextField onChange={handlePasswordConfirmation}  required type='password' id="filled-basic" label={passwordConfirmation} variant="outlined" />
+            <TextField onChange={handlePasswordConfirmation}  required type='password' id="filled-basic" label='Confirm Password' variant="outlined" />
         </Box>
         <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
             <TextField onChange={handleLocation} required id="outlined-basic" label='City, State' variant="outlined"/>
