@@ -17,6 +17,8 @@ function EstablishmentForm(){
     const [establishmentPhotoUrl, setEstablishmentPhotoUrl] = useState('')
     const [allowsDogs, setAllowsDogs] = useState(true)
 
+    const errorMessage = useSelector((state) => state.establishments.errors)
+
     const [error, setError] = useState('')
     const [isDialogOpen, setDialog] = useState(false)
 
@@ -91,12 +93,12 @@ function EstablishmentForm(){
             />
 
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField id="outlined-basic" onChange={handleEstablishmentNameChange} label='Establishment Name' variant="outlined" value={establishmentName}/>
-                <TextField id="outlined-basic" onChange={handleEstablishmentLocationChange} label='Location' variant="outlined" value={establishmentLocation}/>
+                <TextField  id="outlined-basic" onChange={handleEstablishmentNameChange} label='Establishment Name' variant="outlined" value={establishmentName}/>
+                <TextField  id="outlined-basic" onChange={handleEstablishmentLocationChange} label='Location' variant="outlined" value={establishmentLocation}/>
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <TextField id="outlined-basic" onChange={handleEstablishmentTypeChange} label='Type (Restaurant, Bar, etc)' variant="outlined" value={establishmentType}/>
-                <TextField id="outlined-basic" onChange={handleEstablishmentDescriptionChange} label='Description of the Establishment' variant="outlined" value={establishmentDescription}/>
+                <TextField  id="outlined-basic" onChange={handleEstablishmentTypeChange} label='Type (Restaurant, Bar, etc)' variant="outlined" value={establishmentType}/>
+                <TextField  id="outlined-basic" onChange={handleEstablishmentDescriptionChange} label='Description of the Establishment' variant="outlined" value={establishmentDescription}/>
             </Box>
             <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <TextField  id="outlined-basic" onChange={handleEstablishmentPhotoUrlChange} label='Photo Url (Optional)' variant="outlined" value={establishmentPhotoUrl} />

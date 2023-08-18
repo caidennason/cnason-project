@@ -19,7 +19,10 @@ export const postEstablishment = createAsyncThunk("establishments/postEstablishm
     })
     .then((res) => {
         if (!res.ok) {
-            throw new Error('Unable to post establishment. Make sure all required fields are filled out!')
+            return res.json()
+            .then((errorData) => {
+                throw new Error(errorData.error)
+            })
         }
         return res.json()
     })
@@ -83,7 +86,7 @@ const establishmentsSlice = createSlice({
     initialState:{
         entities: [],
         reviews: {},
-        error: "",
+        error: null,
         status: "idle",
     } ,
     reducers: {
@@ -106,6 +109,7 @@ const establishmentsSlice = createSlice({
         },
         [postEstablishment.rejected](state, action){
             console.log(action.payload)
+            state.error = action.error.message
         },
         [postEstablishment.fulfilled](state, action) {
             state.entities.push(action.payload);
