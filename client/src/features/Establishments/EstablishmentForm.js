@@ -25,7 +25,6 @@ function EstablishmentForm(){
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.users.currentUser)
-    console.log(currentUser)
 
     const handleEstablishmentNameChange = (e) => {
         setEstablishmentName(e.target.value)
@@ -79,9 +78,10 @@ function EstablishmentForm(){
                 setError(data.error.message)
             } else {
                 console.log('all good')
+                reset()
             }
         })
-            reset()
+            // reset()
     }
 
     return(

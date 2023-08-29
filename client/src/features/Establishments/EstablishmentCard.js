@@ -18,8 +18,6 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
 
     const dispatch = useDispatch()
 
-    console.log(e)
-
     const [selectedItem, setSelectedItem] = useState(null);
     const [updatedDescription, setUpdatedDescription] = useState(bio);
     const [updatedName, setUpdatedName] = useState(name);
@@ -45,13 +43,9 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
         
     }, [dispatch])
 
-    console.log(currentUser)
-
     const editid = e.id;
-    console.log(e)
 
     const errorMessage = useSelector((state) => state.establishments.error)
-    console.log(errorMessage)
 
     const updatedEstablishmentObject = {
         id: editid,
@@ -77,11 +71,8 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
 
     const handleAllowsDogsChange = (e) => {
         const newAllowsDogs = !updatedAllowsDogs
-        console.log(newAllowsDogs)
         setUpdatedAllowsDogs(newAllowsDogs)
     };
-
-    console.log(updatedEstablishmentObject)
 
     const resetEditForm = () => {
         setUpdatedDescription(bio)
@@ -237,36 +228,3 @@ function EstablishmentCard({e, photo, e:{name, location, bio, establishment_type
 };
 
 export default EstablishmentCard;
-
-// changing photo to photo url and checking false are breaking post'
-
-{/* <form onSubmit={submitEdit}> */}
-            {/* <Select 
-                sx={{boxShadow:'none', '.MuiOutlinedInput-notchedOutline': { border: 0 }}}
-                IconComponent={EditIcon}
-                >
-                <MenuItem>
-                    <TextField onChange={handleDescriptionChange} label="Description"/>
-                </MenuItem> */}
-                {/* <MenuItem>
-                    <TextField label="Location"/>
-                </MenuItem>
-                <MenuItem>
-                 <TextField label="Photo URL"/>
-                </MenuItem>
-                <MenuItem>
-                    <TextField label="Establishment Type"/>
-                </MenuItem> */}
-                {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-simple-select-label">Allows Dogs</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        // value={updatedAllowsDogs}
-                        label="Allows Dogs"
-                        // onChange={handleAllowsDogsChange}
-                        >
-                        <MenuItem value={true}>Allows Dogs!</MenuItem>
-                        <MenuItem value={false}>Doesn't Allow Dogs</MenuItem>
-                        </Select>
-                </FormControl> */}

@@ -91,11 +91,11 @@ const usersSlice = createSlice({
     },
     extraReducers: {
         [getUsers.fulfilled](state, action) {
-            console.log(action.payload)
+
             state.entities = action.payload
         },
         [userLogin.fulfilled](state, action) {
-            console.log(action.payload)
+
             // state.currentUser = action.payload
             return {
                 ...state, 
@@ -103,36 +103,35 @@ const usersSlice = createSlice({
             }
         },
         [userLogin.rejected](state, action) {
-            console.log(action.payload)
+
         },
         [signup.fulfilled](state, action) {
-            console.log(action.payload)
+
             state.entities.push(action.payload)
             state.currentUser = action.payload
             state.errors = null
         },
         [signup.rejected](state, action){
-            console.log(action)
+
             state.error = action.error.message
         },
         [getCurrentUser.fulfilled](state, action) {
-            console.log(action.payload)
+
             state.currentUser = action.payload
-            console.log(state.currentUser)
+
         },
         [getCurrentUser.pending](state, action) { 
-            console.log(' current user is pending ')
+
         },
         [signout.fulfilled](state, action) {
             state.currentUser = null
-            console.log('you are signed out')
+
         }, 
         [signout.pending](state, action) {
-            console.log(' you are being signed out, slowly but surely ')
-            console.log(current(state.currentUser))
+
         },
         [signout.rejected](state, action) {
-            console.log('error is happening on the signout')
+           
         }
     }
 })

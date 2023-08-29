@@ -16,12 +16,12 @@ class EstablishmentController < ApplicationController
             # render json: {error: "Make sure name, type, location and description are completed!"}, status: :unprocessable_entity
             error_messages = []
 
-            error_messages << "name" if establishment.errors[:name].present?
-            error_messages << "type" if establishment.errors[:establishment_type].present?
-            error_messages << "location" if establishment.errors[:location].present?
-            error_messages << "description" if establishment.errors[:bio].present?
+            error_messages << "missing name" if establishment.errors[:name].present?
+            error_messages << "missing type" if establishment.errors[:establishment_type].present?
+            error_messages << "missing location" if establishment.errors[:location].present?
+            error_messages << "missing description" if establishment.errors[:bio].present?
         
-            render json: { error: "Fill out the following: " + error_messages.join(', ') }, status: :unprocessable_entity
+            render json: { error: error_messages.join(', ') }, status: :unprocessable_entity
         end
     end
 

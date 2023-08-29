@@ -45,7 +45,7 @@ export const deleteEstablishment = createAsyncThunk("establishments/deleteEstabl
     })
 
 export const updateEstablishment = createAsyncThunk("establishments/updateEstablishment", (establishment) => {
-    console.log(establishment)
+
     return fetch(`http://localhost:4000/establishments/${establishment.id}`, {
         method: 'PATCH',
         headers: {
@@ -122,19 +122,19 @@ const establishmentsSlice = createSlice({
             state.status = 'deleted';
         },
         [deleteEstablishment.rejected](state, action) { 
-            console.log( ' unable to delete ', action.error.message)
+            
             state.error = action.error.message
-            console.log(state.error, ' checking if state.error works')
+           
         },
         [deleteEstablishment.pending](state, action) {
-            console.log(' pending ');
+
         },
         [updateEstablishment.pending](state, action) {
-            console.log('pending')
+
             console.log(action.payload)
         },
         [updateEstablishment.fulfilled](state, action) {
-            console.log('fulfilled')
+
             console.log(action.payload)
             const updatedEstablishments = state.entities.map((est) => {
                 if (est.id === action.payload.id){
@@ -146,7 +146,7 @@ const establishmentsSlice = createSlice({
             state.entities = updatedEstablishments
         },
         [postReview.pending](state, action){
-            console.log(' pending ')
+
         },
         [postReview.fulfilled](state, action){
             const { establishment_id, ...review } = action.payload; // destructuring the object here.so basically, you're taking the establishment id from this action.payload object, and saving that to a variable called 'establishment_id'. you're saving the rest of the object to 'review'. then, you're finding an establishment from state.entities that has the same id as establishment_id. if that establishment exists, you push the review to the end of the reviews

@@ -16,8 +16,6 @@ import ReviewDialog from './ReviewDialog';
 
 function Reviews({establishments, name}){
 
-    console.log(establishments)
-
     const [reviewContent, setReviewContent] = useState('')
     const [error, setError] = useState('')
     const [isDialogOpen, setDialog] = useState(false)
@@ -25,7 +23,6 @@ function Reviews({establishments, name}){
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.users.currentUser)
-    console.log(currentUser)
     // console.log(currentUser, ' current user from the review component ')
 
     const ExpandMore = styled((props) => {

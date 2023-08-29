@@ -10,7 +10,7 @@ function ErrorDialog({isErrorDialogOpen, onClose, errorDialogMessage}){
 
     return(
         <Dialog open={isErrorDialogOpen} onClose={onClose}>
-            <DialogTitle>Fill out the following:</DialogTitle>
+            <DialogTitle>Error</DialogTitle>
             <DialogContent>
                 <DialogContentText>{errorDialogMessage}</DialogContentText>
             </DialogContent>

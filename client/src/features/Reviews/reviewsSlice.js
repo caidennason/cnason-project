@@ -37,24 +37,23 @@ const reviewsSlice = createSlice({
     }, 
     extraReducers: {
         [getReviews.pending](state, action){
-            console.log('pending fetch')
+
 
         },
         [getReviews.fulfilled](state, action){
-            console.log(action.payload)
+
             state.entities = action.payload
-            console.log(state.entities)
+
         },
         [postReview.pending](state, action){
-            console.log(' pending ')
+
         },
         [postReview.fulfilled](state, action){
-            console.log(action.payload, ' from the slice ')
-            console.log(current(state.entities))
+
             state.entities.push(action.payload)
         },
         [postReview.rejected](state, action) {
-            console.log(action.payload)
+
         },
     }
 })

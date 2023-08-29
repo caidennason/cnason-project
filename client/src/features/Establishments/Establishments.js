@@ -7,6 +7,7 @@ import { Grid } from '@mui/material';
 import SearchBar from './SearchBar';
 import { getCurrentUser, getUsers } from '../Users/userSlice';
 
+
 function Establishments() {
     const establishments = useSelector((state) => state.establishments.entities);
     const dispatch = useDispatch();
@@ -26,8 +27,6 @@ function Establishments() {
       dispatch(getUsers())
     }, [getUsers])
 
-    console.log(establishments)
-    console.log(users)
   
     return (
       <div>
