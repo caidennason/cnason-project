@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextField, Box } from '@mui/material';
 import { GoogleMap, useLoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
@@ -37,29 +38,20 @@ function Map() {
   return (
     <div style={{ width: '80%', height: '80vh', margin: 'auto' }}>
       <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-        <input
+        <Box style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+        <TextField
           type="text"
           placeholder="Enter a location"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-          }}
         />
+         Make sure to write the complete address (ex: Minnows Bar, rather than Minnows)!
+        </Box>
       </Autocomplete>
 
       <GoogleMap
         zoom={12}
-        center={selectedLatLng || { lat: 34.5362, lng: -117.2928 }}
+        center={selectedLatLng || { lat: 40.6782, lng: -73.9442 }}
         mapContainerStyle={{ width: '100%', height: '100%' }}
       >
         {markerPositions.map((position, index) => (
