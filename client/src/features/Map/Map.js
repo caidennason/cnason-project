@@ -18,9 +18,9 @@ function Map() {
     console.log('Autocomplete loaded: ', autocomplete);
   };
 
-  const onPlaceChanged = async (address) => {
+  const onPlaceChanged = async () => {
     try {
-      setAddress(address);
+    //   setAddress(address);
       const results = await geocodeByAddress(address);
       const latLng = await getLatLng(results[0]);
       setSelectedLatLng(latLng);
@@ -36,7 +36,7 @@ function Map() {
 
   return (
     <div style={{ width: '80%', height: '80vh', margin: 'auto' }}>
-      <Autocomplete onLoad={onLoad} onPlaceChanged={() => onPlaceChanged(address)}>
+      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
         <input
           type="text"
           placeholder="Enter a location"
