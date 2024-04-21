@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Box } from '@mui/material';
 import { GoogleMap, useLoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
@@ -9,6 +9,25 @@ function Map() {
   const [selectedLatLng, setSelectedLatLng] = useState(null);
   const [markerPositions, setMarkerPosition] = useState([])
   const [address, setAddress] = useState('');
+  const [currentLocation, setCurrentLocation] = useState(null)
+
+  useEffect(() => {
+    if ("geolocation" in navigator){
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const {latitude, longitude} = position.coords
+          setCurrentLocation({lat: latitude, lng: longitude})
+        }, 
+        error => {
+          console.error("Error getting current location: ", error)
+        }
+      )
+    } else {
+      console.log("Geolocation is not available in this browser.")
+    }
+  }, [])
+
+  console.log(currentLocation)
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: api_key,
@@ -51,6 +70,7 @@ function Map() {
 
       <GoogleMap
         zoom={12}
+        // center={selectedLatLng || { lat: 40.6782, lng: -73.9442 }}
         center={selectedLatLng || { lat: 40.6782, lng: -73.9442 }}
         mapContainerStyle={{ width: '100%', height: '100%' }}
       >

@@ -47,7 +47,7 @@ function App() {
           {<Button color='inherit' component={Link} to='/'>Home</Button>}
           {currentUser ? <Button color='inherit' component={Link} to='/establishments'>Establishments</Button> : ' '}
           {currentUser ? <Button color='inherit' component={Link} to='/profile'>Profile</Button> : ' '}
-          {currentUser ? <Button color='inherit' component={Link} to='/map'>Map</Button> : ' '}
+          {/* {currentUser ? <Button color='inherit' component={Link} to='/map'>Map</Button> : ' '} */}
           {!currentUser ? <Button color='inherit' component={Link} to='/login'>Login</Button> : ' '}
           {!currentUser ? <Button color='inherit' component={Link} to='/signup'>Signup</Button> : ' '}
         </Stack>
@@ -58,7 +58,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/establishments" element={<Establishments />} />
         <Route path="/profile" element={<User />} />
-        <Route path='/map' element={<Map />}/>
+        {/* <Route path='/map' element={<Map />}/> */}
         <Route path="/login" element={<Login/>} />
         <Route path='/signup' element={<Signup/>}/>
       </Routes>
